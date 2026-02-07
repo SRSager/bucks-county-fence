@@ -1,6 +1,7 @@
 <script lang="ts">
   import { leadFormStore, formProgress } from '../stores/leadFormStore';
   import { fade, slide } from 'svelte/transition';
+  import AddressAutocomplete from './AddressAutocomplete.svelte';
   
   // Step titles
   const stepTitles = [
@@ -20,8 +21,7 @@
     { value: 'new_fence', label: 'New Fence Installation' },
     { value: 'fence_repair', label: 'Fence Repair' },
     { value: 'fence_replacement', label: 'Fence Replacement' },
-    { value: 'gate_installation', label: 'Gate Installation' },
-    { value: 'other', label: 'Other' },
+    { value: 'gate_installation', label: 'Gate Installation/Repair' },
   ];
   
   // Step 2 options: Fence Material
@@ -78,6 +78,14 @@
   let formElement: HTMLFormElement;
   
   function handleNext() {
+    // Validate step 7 (contact info) and step 8 (address) before proceeding
+    if ($leadFormStore.currentStep === 7 || $leadFormStore.currentStep === 8) {
+      const isValid = leadFormStore.validateStep($leadFormStore.currentStep, $leadFormStore.data);
+      if (!isValid) {
+        return; // Stop if validation fails
+      }
+    }
+    
     if ($leadFormStore.currentStep === 9) {
       submitForm();
     } else {
@@ -122,6 +130,11 @@
     const input = event.target as HTMLInputElement;
     const formatted = formatPhone(input.value);
     leadFormStore.setField('phone', formatted);
+  }
+
+  function handleInput(event: Event, field: string) {
+    const input = event.target as HTMLInputElement;
+    leadFormStore.setField(field, input.value);
   }
 </script>
 
@@ -175,20 +188,31 @@
         {#if $leadFormStore.currentStep === 1}
           <div class="grid gap-3" in:slide>
             {#each projectTypes as type}
+              {@const isSelected = $leadFormStore.data.projectType === type.value}
               <label 
-                class="flex items-center gap-4 p-4 border-2 rounded-lg cursor-pointer transition-all hover:border-blue-300 hover:bg-blue-50"
-                class:border-blue-600={$leadFormStore.data.projectType === type.value}
-                class:bg-blue-50={$leadFormStore.data.projectType === type.value}
-                class:border-slate-200={$leadFormStore.data.projectType !== type.value}
+                class="flex items-center gap-4 p-4 border-2 rounded-lg cursor-pointer transition-all"
+                class:border-amber-500={isSelected}
+                class:bg-amber-50={isSelected}
+                class:ring-2={isSelected}
+                class:ring-amber-500={isSelected}
+                class:border-slate-200={!isSelected}
+                class:hover:border-amber-300={!isSelected}
+                class:hover:bg-amber-50={!isSelected}
               >
                 <input 
                   type="radio" 
                   name="projectType" 
                   value={type.value}
-                  bind:group={$leadFormStore.data.projectType}
+                  checked={isSelected}
+                  on:change={() => leadFormStore.setField('projectType', type.value)}
                   class="sr-only"
                 />
-                <span class="font-medium text-slate-900">{type.label}</span>
+                <span class="font-medium" class:text-amber-900={isSelected} class:text-slate-900={!isSelected}>{type.label}</span>
+                {#if isSelected}
+                  <svg class="w-5 h-5 text-amber-600 ml-auto" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                {/if}
               </label>
             {/each}
           </div>
@@ -198,23 +222,34 @@
         {#if $leadFormStore.currentStep === 2}
           <div class="grid gap-3" in:slide>
             {#each fenceMaterials as material}
+              {@const isSelected = $leadFormStore.data.fenceMaterial === material.value}
               <label 
-                class="flex items-center gap-4 p-4 border-2 rounded-lg cursor-pointer transition-all hover:border-blue-300 hover:bg-blue-50"
-                class:border-blue-600={$leadFormStore.data.fenceMaterial === material.value}
-                class:bg-blue-50={$leadFormStore.data.fenceMaterial === material.value}
-                class:border-slate-200={$leadFormStore.data.fenceMaterial !== material.value}
+                class="flex items-center gap-4 p-4 border-2 rounded-lg cursor-pointer transition-all"
+                class:border-amber-500={isSelected}
+                class:bg-amber-50={isSelected}
+                class:ring-2={isSelected}
+                class:ring-amber-500={isSelected}
+                class:border-slate-200={!isSelected}
+                class:hover:border-amber-300={!isSelected}
+                class:hover:bg-amber-50={!isSelected}
               >
                 <input 
                   type="radio" 
                   name="fenceMaterial" 
                   value={material.value}
-                  bind:group={$leadFormStore.data.fenceMaterial}
+                  checked={isSelected}
+                  on:change={() => leadFormStore.setField('fenceMaterial', material.value)}
                   class="sr-only"
                 />
-                <div>
-                  <span class="font-medium text-slate-900 block">{material.label}</span>
-                  <span class="text-sm text-slate-500">{material.description}</span>
+                <div class="flex-1">
+                  <span class="font-medium block" class:text-amber-900={isSelected} class:text-slate-900={!isSelected}>{material.label}</span>
+                  <span class="text-sm" class:text-amber-700={isSelected} class:text-slate-500={!isSelected}>{material.description}</span>
                 </div>
+                {#if isSelected}
+                  <svg class="w-5 h-5 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                {/if}
               </label>
             {/each}
           </div>
@@ -224,23 +259,34 @@
         {#if $leadFormStore.currentStep === 3}
           <div class="grid gap-3" in:slide>
             {#each timelines as timeline}
+              {@const isSelected = $leadFormStore.data.timeline === timeline.value}
               <label 
-                class="flex items-center gap-4 p-4 border-2 rounded-lg cursor-pointer transition-all hover:border-blue-300 hover:bg-blue-50"
-                class:border-blue-600={$leadFormStore.data.timeline === timeline.value}
-                class:bg-blue-50={$leadFormStore.data.timeline === timeline.value}
-                class:border-slate-200={$leadFormStore.data.timeline !== timeline.value}
+                class="flex items-center gap-4 p-4 border-2 rounded-lg cursor-pointer transition-all"
+                class:border-amber-500={isSelected}
+                class:bg-amber-50={isSelected}
+                class:ring-2={isSelected}
+                class:ring-amber-500={isSelected}
+                class:border-slate-200={!isSelected}
+                class:hover:border-amber-300={!isSelected}
+                class:hover:bg-amber-50={!isSelected}
               >
                 <input 
                   type="radio" 
                   name="timeline" 
                   value={timeline.value}
-                  bind:group={$leadFormStore.data.timeline}
+                  checked={isSelected}
+                  on:change={() => leadFormStore.setField('timeline', timeline.value)}
                   class="sr-only"
                 />
-                <div>
-                  <span class="font-medium text-slate-900 block">{timeline.label}</span>
-                  <span class="text-sm text-slate-500">{timeline.description}</span>
+                <div class="flex-1">
+                  <span class="font-medium block" class:text-amber-900={isSelected} class:text-slate-900={!isSelected}>{timeline.label}</span>
+                  <span class="text-sm" class:text-amber-700={isSelected} class:text-slate-500={!isSelected}>{timeline.description}</span>
                 </div>
+                {#if isSelected}
+                  <svg class="w-5 h-5 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                {/if}
               </label>
             {/each}
           </div>
@@ -250,20 +296,31 @@
         {#if $leadFormStore.currentStep === 4}
           <div class="grid grid-cols-2 gap-3" in:slide>
             {#each propertyTypes as property}
+              {@const isSelected = $leadFormStore.data.propertyType === property.value}
               <label 
-                class="flex flex-col items-center justify-center p-4 border-2 rounded-lg cursor-pointer transition-all hover:border-blue-300 hover:bg-blue-50 text-center h-24"
-                class:border-blue-600={$leadFormStore.data.propertyType === property.value}
-                class:bg-blue-50={$leadFormStore.data.propertyType === property.value}
-                class:border-slate-200={$leadFormStore.data.propertyType !== property.value}
+                class="flex flex-col items-center justify-center p-4 border-2 rounded-lg cursor-pointer transition-all text-center h-24"
+                class:border-amber-500={isSelected}
+                class:bg-amber-50={isSelected}
+                class:ring-2={isSelected}
+                class:ring-amber-500={isSelected}
+                class:border-slate-200={!isSelected}
+                class:hover:border-amber-300={!isSelected}
+                class:hover:bg-amber-50={!isSelected}
               >
                 <input 
                   type="radio" 
                   name="propertyType" 
                   value={property.value}
-                  bind:group={$leadFormStore.data.propertyType}
+                  checked={isSelected}
+                  on:change={() => leadFormStore.setField('propertyType', property.value)}
                   class="sr-only"
                 />
-                <span class="font-medium text-slate-900">{property.label}</span>
+                <span class="font-medium" class:text-amber-900={isSelected} class:text-slate-900={!isSelected}>{property.label}</span>
+                {#if isSelected}
+                  <svg class="w-5 h-5 text-amber-600 mt-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                {/if}
               </label>
             {/each}
           </div>
@@ -273,20 +330,30 @@
         {#if $leadFormStore.currentStep === 5}
           <div class="grid grid-cols-2 gap-3" in:slide>
             {#each fencePurposes as purpose}
+              {@const isSelected = $leadFormStore.data.fencePurpose?.includes(purpose.value)}
               <label 
-                class="flex flex-col items-center justify-center p-4 border-2 rounded-lg cursor-pointer transition-all hover:border-blue-300 hover:bg-blue-50 text-center h-24"
-                class:border-blue-600={$leadFormStore.data.fencePurpose?.includes(purpose.value)}
-                class:bg-blue-50={$leadFormStore.data.fencePurpose?.includes(purpose.value)}
-                class:border-slate-200={!$leadFormStore.data.fencePurpose?.includes(purpose.value)}
+                class="flex flex-col items-center justify-center p-4 border-2 rounded-lg cursor-pointer transition-all text-center h-24"
+                class:border-amber-500={isSelected}
+                class:bg-amber-50={isSelected}
+                class:ring-2={isSelected}
+                class:ring-amber-500={isSelected}
+                class:border-slate-200={!isSelected}
+                class:hover:border-amber-300={!isSelected}
+                class:hover:bg-amber-50={!isSelected}
               >
                 <input 
                   type="checkbox" 
                   value={purpose.value}
-                  checked={$leadFormStore.data.fencePurpose?.includes(purpose.value)}
+                  checked={isSelected}
                   on:change={() => leadFormStore.toggleArrayField('fencePurpose', purpose.value)}
                   class="sr-only"
                 />
-                <span class="font-medium text-slate-900">{purpose.label}</span>
+                <span class="font-medium" class:text-amber-900={isSelected} class:text-slate-900={!isSelected}>{purpose.label}</span>
+                {#if isSelected}
+                  <svg class="w-5 h-5 text-amber-600 mt-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                {/if}
               </label>
             {/each}
           </div>
@@ -299,23 +366,34 @@
         {#if $leadFormStore.currentStep === 6}
           <div class="grid gap-3" in:slide>
             {#each fenceLengths as length}
+              {@const isSelected = $leadFormStore.data.fenceLength === length.value}
               <label 
-                class="flex items-center gap-4 p-4 border-2 rounded-lg cursor-pointer transition-all hover:border-blue-300 hover:bg-blue-50"
-                class:border-blue-600={$leadFormStore.data.fenceLength === length.value}
-                class:bg-blue-50={$leadFormStore.data.fenceLength === length.value}
-                class:border-slate-200={$leadFormStore.data.fenceLength !== length.value}
+                class="flex items-center gap-4 p-4 border-2 rounded-lg cursor-pointer transition-all"
+                class:border-amber-500={isSelected}
+                class:bg-amber-50={isSelected}
+                class:ring-2={isSelected}
+                class:ring-amber-500={isSelected}
+                class:border-slate-200={!isSelected}
+                class:hover:border-amber-300={!isSelected}
+                class:hover:bg-amber-50={!isSelected}
               >
                 <input 
                   type="radio" 
                   name="fenceLength" 
                   value={length.value}
-                  bind:group={$leadFormStore.data.fenceLength}
+                  checked={isSelected}
+                  on:change={() => leadFormStore.setField('fenceLength', length.value)}
                   class="sr-only"
                 />
-                <div>
-                  <span class="font-medium text-slate-900 block">{length.label}</span>
-                  <span class="text-sm text-slate-500">{length.description}</span>
+                <div class="flex-1">
+                  <span class="font-medium block" class:text-amber-900={isSelected} class:text-slate-900={!isSelected}>{length.label}</span>
+                  <span class="text-sm" class:text-amber-700={isSelected} class:text-slate-500={!isSelected}>{length.description}</span>
                 </div>
+                {#if isSelected}
+                  <svg class="w-5 h-5 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                {/if}
               </label>
             {/each}
           </div>
@@ -329,7 +407,8 @@
                 <label class="block text-sm font-medium text-slate-700 mb-1">First Name *</label>
                 <input 
                   type="text" 
-                  bind:value={$leadFormStore.data.firstName}
+                  value={$leadFormStore.data.firstName || ''}
+                  on:input={(e) => handleInput(e, 'firstName')}
                   class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   placeholder="John"
                 />
@@ -341,7 +420,8 @@
                 <label class="block text-sm font-medium text-slate-700 mb-1">Last Name *</label>
                 <input 
                   type="text" 
-                  bind:value={$leadFormStore.data.lastName}
+                  value={$leadFormStore.data.lastName || ''}
+                  on:input={(e) => handleInput(e, 'lastName')}
                   class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Doe"
                 />
@@ -354,7 +434,8 @@
               <label class="block text-sm font-medium text-slate-700 mb-1">Email Address *</label>
               <input 
                 type="email" 
-                bind:value={$leadFormStore.data.email}
+                value={$leadFormStore.data.email || ''}
+                on:input={(e) => handleInput(e, 'email')}
                 class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="john@example.com"
               />
@@ -383,11 +464,15 @@
           <div class="space-y-4" in:slide>
             <div>
               <label class="block text-sm font-medium text-slate-700 mb-1">Street Address *</label>
-              <input 
-                type="text" 
-                bind:value={$leadFormStore.data.streetAddress}
-                class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="123 Main Street"
+              <AddressAutocomplete
+                streetValue={$leadFormStore.data.streetAddress || ''}
+                cityValue={$leadFormStore.data.city || ''}
+                zipValue={$leadFormStore.data.zipCode || ''}
+                onAddressSelect={(street, city, zip) => {
+                  leadFormStore.setField('streetAddress', street);
+                  leadFormStore.setField('city', city);
+                  leadFormStore.setField('zipCode', zip);
+                }}
               />
               {#if $leadFormStore.errors.streetAddress}
                 <p class="text-red-500 text-sm mt-1">{$leadFormStore.errors.streetAddress}</p>
@@ -398,8 +483,9 @@
                 <label class="block text-sm font-medium text-slate-700 mb-1">City *</label>
                 <input 
                   type="text" 
-                  bind:value={$leadFormStore.data.city}
-                  class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  value={$leadFormStore.data.city || ''}
+                  on:input={(e) => handleInput(e, 'city')}
+                  class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                   placeholder="Doylestown"
                 />
                 {#if $leadFormStore.errors.city}
@@ -410,8 +496,9 @@
                 <label class="block text-sm font-medium text-slate-700 mb-1">ZIP Code *</label>
                 <input 
                   type="text" 
-                  bind:value={$leadFormStore.data.zipCode}
-                  class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  value={$leadFormStore.data.zipCode || ''}
+                  on:input={(e) => handleInput(e, 'zipCode')}
+                  class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                   placeholder="18901"
                 />
                 {#if $leadFormStore.errors.zipCode}
@@ -430,7 +517,8 @@
                 Additional Details (Optional)
               </label>
               <textarea 
-                bind:value={$leadFormStore.data.additionalDetails}
+                value={$leadFormStore.data.additionalDetails || ''}
+                on:input={(e) => handleInput(e, 'additionalDetails')}
                 rows="4"
                 class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Tell us more about your project, special requirements, or any questions you have..."
@@ -439,7 +527,8 @@
             <label class="flex items-start gap-3">
               <input 
                 type="checkbox" 
-                bind:checked={$leadFormStore.data.marketingConsent}
+                checked={$leadFormStore.data.marketingConsent || false}
+                on:change={(e) => leadFormStore.setField('marketingConsent', (e.target as HTMLInputElement).checked)}
                 class="mt-1 w-4 h-4 text-blue-600 border-slate-300 rounded focus:ring-blue-500"
               />
               <span class="text-sm text-slate-600">
@@ -463,7 +552,7 @@
           <button 
             type="submit"
             disabled={$leadFormStore.isSubmitting}
-            class="flex-1 px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            class="flex-1 px-6 py-3 bg-amber-500 text-white font-medium rounded-lg hover:bg-amber-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {#if $leadFormStore.isSubmitting}
               <span class="flex items-center justify-center gap-2">

@@ -1,6 +1,8 @@
 import { writable, derived } from 'svelte/store';
 import { z } from 'zod';
 
+const STORAGE_KEY = 'bucks-county-fence-form';
+
 // Define the form schema with Zod
 export const leadFormSchema = z.object({
   // Step 1: Project Type
@@ -41,8 +43,23 @@ export const leadFormSchema = z.object({
 
 export type LeadFormData = z.infer<typeof leadFormSchema>;
 
+// Load saved form state from localStorage
+function loadSavedState(): Partial<LeadFormData> | null {
+  if (typeof window !== 'undefined') {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        return JSON.parse(saved);
+      }
+    } catch (e) {
+      console.error('Failed to load saved form state:', e);
+    }
+  }
+  return null;
+}
+
 // Initial form state
-const initialState: Partial<LeadFormData> = {
+const defaultState: Partial<LeadFormData> = {
   projectType: undefined,
   fenceMaterial: undefined,
   timeline: undefined,
@@ -60,6 +77,10 @@ const initialState: Partial<LeadFormData> = {
   marketingConsent: false,
 };
 
+// Load saved data or use defaults
+const savedData = loadSavedState();
+const initialState = savedData || defaultState;
+
 // Create the store
 function createLeadFormStore() {
   const { subscribe, set, update } = writable({
@@ -71,16 +92,42 @@ function createLeadFormStore() {
     isComplete: false,
   });
 
+// Save form data to localStorage
+function saveToStorage(data: Partial<LeadFormData>) {
+  if (typeof window !== 'undefined') {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    } catch (e) {
+      console.error('Failed to save form state:', e);
+    }
+  }
+}
+
+// Clear saved form data from localStorage
+function clearStorage() {
+  if (typeof window !== 'undefined') {
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch (e) {
+      console.error('Failed to clear form state:', e);
+    }
+  }
+}
+
   return {
     subscribe,
     
     // Update a field value
     setField: (field: keyof LeadFormData, value: any) => {
-      update(state => ({
-        ...state,
-        data: { ...state.data, [field]: value },
-        errors: { ...state.errors, [field]: '' }, // Clear error when field is updated
-      }));
+      update(state => {
+        const newData = { ...state.data, [field]: value };
+        saveToStorage(newData);
+        return {
+          ...state,
+          data: newData,
+          errors: { ...state.errors, [field]: '' }, // Clear error when field is updated
+        };
+      });
     },
     
     // Toggle array values (for checkboxes)
@@ -90,20 +137,22 @@ function createLeadFormStore() {
         const newArray = currentArray.includes(value)
           ? currentArray.filter(item => item !== value)
           : [...currentArray, value];
+        const newData = { ...state.data, [field]: newArray };
+        saveToStorage(newData);
         return {
           ...state,
-          data: { ...state.data, [field]: newArray },
+          data: newData,
           errors: { ...state.errors, [field]: '' },
         };
       });
     },
     
     // Validate current step
-    validateStep: (step: number): boolean => {
+    validateStep: (step: number, currentData: Partial<LeadFormData>): boolean => {
       let isValid = true;
       const errors: Record<string, string> = {};
       
-      const state = { ...initialState }; // Get current state
+      const state = currentData;
       
       // Step-specific validation
       switch (step) {
@@ -144,11 +193,11 @@ function createLeadFormStore() {
           }
           break;
         case 7:
-          if (!state.firstName || state.firstName.length < 2) {
+          if (!state.firstName || state.firstName.trim().length < 2) {
             errors.firstName = 'First name is required';
             isValid = false;
           }
-          if (!state.lastName || state.lastName.length < 2) {
+          if (!state.lastName || state.lastName.trim().length < 2) {
             errors.lastName = 'Last name is required';
             isValid = false;
           }
@@ -156,17 +205,17 @@ function createLeadFormStore() {
             errors.email = 'Valid email is required';
             isValid = false;
           }
-          if (!state.phone || state.phone.length < 10) {
+          if (!state.phone || state.phone.replace(/\D/g, '').length < 10) {
             errors.phone = 'Valid phone number is required';
             isValid = false;
           }
           break;
         case 8:
-          if (!state.streetAddress || state.streetAddress.length < 5) {
+          if (!state.streetAddress || state.streetAddress.trim().length < 3) {
             errors.streetAddress = 'Street address is required';
             isValid = false;
           }
-          if (!state.city || state.city.length < 2) {
+          if (!state.city || state.city.trim().length < 2) {
             errors.city = 'City is required';
             isValid = false;
           }
@@ -185,7 +234,9 @@ function createLeadFormStore() {
     nextStep: () => {
       update(state => {
         if (state.currentStep < state.totalSteps) {
-          return { ...state, currentStep: state.currentStep + 1 };
+          const newState = { ...state, currentStep: state.currentStep + 1 };
+          saveToStorage(newState.data);
+          return newState;
         }
         return state;
       });
@@ -195,7 +246,9 @@ function createLeadFormStore() {
     prevStep: () => {
       update(state => {
         if (state.currentStep > 1) {
-          return { ...state, currentStep: state.currentStep - 1 };
+          const newState = { ...state, currentStep: state.currentStep - 1 };
+          saveToStorage(newState.data);
+          return newState;
         }
         return state;
       });
@@ -203,16 +256,26 @@ function createLeadFormStore() {
     
     // Set submitting state
     setSubmitting: (isSubmitting: boolean) => {
-      update(state => ({ ...state, isSubmitting }));
+      update(state => {
+        const newState = { ...state, isSubmitting };
+        if (isSubmitting) {
+          saveToStorage(newState.data);
+        }
+        return newState;
+      });
     },
     
     // Mark form as complete
     setComplete: () => {
-      update(state => ({ ...state, isComplete: true, isSubmitting: false }));
+      update(state => {
+        clearStorage();
+        return { ...state, isComplete: true, isSubmitting: false };
+      });
     },
     
     // Reset form
     reset: () => {
+      clearStorage();
       set({
         data: initialState,
         currentStep: 1,
