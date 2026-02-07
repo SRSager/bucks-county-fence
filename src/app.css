@@ -1,0 +1,156 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+/* Self-hosted DM Sans font - no Google Fonts API calls */
+@import "@fontsource/dm-sans/400.css";
+@import "@fontsource/dm-sans/500.css";
+@import "@fontsource/dm-sans/600.css";
+@import "@fontsource/dm-sans/700.css";
+
+/* Set DM Sans as default font */
+html {
+  font-family: "DM Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+body {
+  font-family: "DM Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+/* Fluid Typography Scale */
+:root {
+  /* Fluid type scale using clamp()
+     min size: at 320px viewport
+     preferred: scales with viewport
+     max size: at 1920px viewport */
+  
+  /* Body text: 14px → 16px */
+  --text-fluid-sm: clamp(0.875rem, 0.85rem + 0.125vw, 1rem);
+  
+  /* Base text: 16px → 18px */
+  --text-fluid-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  
+  /* Large text: 18px → 21px */
+  --text-fluid-lg: clamp(1.125rem, 1.05rem + 0.375vw, 1.3125rem);
+  
+  /* XL text: 20px → 26px */
+  --text-fluid-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.625rem);
+  
+  /* 2XL text: 24px → 32px */
+  --text-fluid-2xl: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+  
+  /* 3XL text: 30px → 48px */
+  --text-fluid-3xl: clamp(1.875rem, 1.5rem + 1.875vw, 3rem);
+  
+  /* 4XL text: 36px → 60px */
+  --text-fluid-4xl: clamp(2.25rem, 1.8rem + 2.25vw, 3.75rem);
+  
+  /* 5XL text: 48px → 72px */
+  --text-fluid-5xl: clamp(3rem, 2.4rem + 3vw, 4.5rem);
+}
+
+/* Apply fluid type to elements (only when no explicit class is set) */
+article p, article li, article td,
+.prose p, .prose li, .prose td {
+  font-size: var(--text-fluid-base);
+}
+
+h1:not([class*="text-"]) {
+  font-size: var(--text-fluid-4xl);
+  line-height: 1.1;
+}
+
+h2:not([class*="text-"]) {
+  font-size: var(--text-fluid-3xl);
+  line-height: 1.2;
+}
+
+h3:not([class*="text-"]) {
+  font-size: var(--text-fluid-2xl);
+  line-height: 1.2;
+}
+
+h4:not([class*="text-"]) {
+  font-size: var(--text-fluid-xl);
+  line-height: 1.3;
+}
+
+h5:not([class*="text-"]), h6:not([class*="text-"]) {
+  font-size: var(--text-fluid-lg);
+  line-height: 1.3;
+}
+
+.small, small {
+  font-size: var(--text-fluid-sm);
+}
+
+@theme inline {
+  /* shadcn-svelte "Slate" theme variables */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+}
+
+:root {
+  --background: hsl(0 0% 100%);
+  --foreground: hsl(222.2 84% 4.9%);
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(222.2 84% 4.9%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(222.2 84% 4.9%);
+  --primary: hsl(222.2 47.4% 11.2%);
+  --primary-foreground: hsl(210 40% 98%);
+  --secondary: hsl(210 40% 96.1%);
+  --secondary-foreground: hsl(222.2 47.4% 11.2%);
+  --muted: hsl(210 40% 96.1%);
+  --muted-foreground: hsl(215.4 16.3% 46.9%);
+  --accent: hsl(210 40% 96.1%);
+  --accent-foreground: hsl(222.2 47.4% 11.2%);
+  --destructive: hsl(0 84.2% 60.2%);
+  --destructive-foreground: hsl(210 40% 98%);
+  --border: hsl(214.3 31.8% 91.4%);
+  --input: hsl(214.3 31.8% 91.4%);
+  --ring: hsl(222.2 84% 4.9%);
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: hsl(222.2 84% 4.9%);
+  --foreground: hsl(210 40% 98%);
+  --card: hsl(222.2 84% 4.9%);
+  --card-foreground: hsl(210 40% 98%);
+  --popover: hsl(222.2 84% 4.9%);
+  --popover-foreground: hsl(210 40% 98%);
+  --primary: hsl(210 40% 98%);
+  --primary-foreground: hsl(222.2 47.4% 11.2%);
+  --secondary: hsl(217.2 32.6% 17.5%);
+  --secondary-foreground: hsl(210 40% 98%);
+  --muted: hsl(217.2 32.6% 17.5%);
+  --muted-foreground: hsl(215 20.2% 65.1%);
+  --accent: hsl(217.2 32.6% 17.5%);
+  --accent-foreground: hsl(210 40% 98%);
+  --destructive: hsl(0 62.8% 30.6%);
+  --destructive-foreground: hsl(210 40% 98%);
+  --border: hsl(217.2 32.6% 17.5%);
+  --input: hsl(217.2 32.6% 17.5%);
+  --ring: hsl(212.7 26.8% 83.9%);
+}

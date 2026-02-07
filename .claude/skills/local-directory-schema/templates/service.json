@@ -1,0 +1,126 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": "{{pageUrl}}/#service",
+      "serviceType": "{{service.name}}",
+      "description": "{{service.description}}",
+      "provider": [
+        {{#featuredContractors}}
+        {
+          "@type": "LocalBusiness",
+          "name": "{{name}}",
+          "url": "{{url}}",
+          "telephone": "{{phone}}",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "{{city}}",
+            "addressRegion": "{{stateCode}}"
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "{{rating}}",
+            "reviewCount": "{{reviewCount}}"
+          }
+        }{{^isLast}},{{/isLast}}
+        {{/featuredContractors}}
+      ],
+      "areaServed": {
+        "@type": "County",
+        "name": "{{countyName}}",
+        "containedInPlace": {
+          "@type": "State",
+          "name": "{{stateName}}"
+        }
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "{{service.name}} Options",
+        "itemListElement": [
+          {{#service.options}}
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "{{name}}",
+              "description": "{{description}}"
+            },
+            "price": "{{price}}",
+            "priceUnit": "{{unit}}",
+            "priceCurrency": "USD"
+          }{{^isLast}},{{/isLast}}
+          {{/service.options}}
+        ]
+      }
+    },
+    {
+      "@type": "HowTo",
+      "@id": "{{pageUrl}}/#howto",
+      "name": "How to Choose {{service.name}} in {{countyName}}",
+      "description": "Step-by-step guide to selecting the right {{service.name}} for your property",
+      "totalTime": "P1D",
+      "estimatedCost": {
+        "@type": "MonetaryAmount",
+        "currency": "USD",
+        "value": "{{service.avgPrice}}"
+      },
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Assess Your Needs",
+          "text": "Determine fence purpose: privacy, security, decoration, or pet containment."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Check Local Zoning",
+          "text": "Review your township's fence regulations and permit requirements."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Get Multiple Quotes",
+          "text": "Contact several contractors for estimates and compare services."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Verify Credentials",
+          "text": "Check licenses, insurance, and reviews before hiring."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "name": "Schedule Installation",
+          "text": "Book your installation date and prepare the area."
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "{{pageUrl}}/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "{{siteUrl}}/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Services",
+          "item": "{{siteUrl}}/services/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "{{service.name}}",
+          "item": "{{pageUrl}}"
+        }
+      ]
+    }
+  ]
+}

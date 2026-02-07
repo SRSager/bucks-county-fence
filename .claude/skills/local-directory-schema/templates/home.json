@@ -1,0 +1,95 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "{{siteUrl}}/#website",
+      "url": "{{siteUrl}}",
+      "name": "{{siteName}}",
+      "description": "{{siteDescription}}",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "{{siteUrl}}/search?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "{{siteUrl}}/#organization",
+      "name": "{{siteName}}",
+      "url": "{{siteUrl}}",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{siteUrl}}/logo.png",
+        "width": 512,
+        "height": 512
+      },
+      "sameAs": [
+        "{{facebookUrl}}",
+        "{{twitterUrl}}"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "{{contactPhone}}",
+        "contactType": "customer service",
+        "areaServed": "{{countyName}}, {{stateCode}}",
+        "availableLanguage": "English"
+      }
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "{{siteUrl}}/#localbusiness",
+      "name": "{{siteName}}",
+      "description": "Directory of fence contractors serving {{countyName}}, {{stateCode}}",
+      "url": "{{siteUrl}}",
+      "telephone": "{{contactPhone}}",
+      "email": "{{contactEmail}}",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "{{countySeat}}",
+        "addressRegion": "{{stateCode}}",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "{{countyLat}}",
+        "longitude": "{{countyLng}}"
+      },
+      "serviceArea": {
+        "@type": "AdministrativeArea",
+        "name": "{{countyName}}",
+        "containedInPlace": {
+          "@type": "State",
+          "name": "{{stateName}}"
+        }
+      },
+      "areaServed": [
+        {{#cities}}
+        {
+          "@type": "City",
+          "name": "{{name}}",
+          "containedInPlace": {
+            "@type": "County",
+            "name": "{{countyName}}"
+          }
+        }{{^isLast}},{{/isLast}}
+        {{/cities}}
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "{{siteUrl}}/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "{{siteUrl}}/"
+        }
+      ]
+    }
+  ]
+}

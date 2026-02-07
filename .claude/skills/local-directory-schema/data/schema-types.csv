@@ -1,0 +1,43 @@
+Page Type,Schema Type,Required,Priority,Description,Properties Needed,Rich Snippet
+Home,WebSite,Yes,Critical,Site search and sitelinks,"url,name,potentialAction",Sitelinks
+Home,Organization,Yes,Critical,Parent company entity,"name,url,logo,contactPoint",Knowledge Panel
+Home,LocalBusiness,Yes,High,Directory business info,"name,address,telephone,geo,openingHours",Local Pack
+Home,BreadcrumbList,Yes,High,Navigation hierarchy,"itemListElement",Breadcrumbs
+Home,FAQPage,No,Medium,Homepage FAQs,"mainEntity",FAQ Rich Result
+Location,LocalBusiness,Yes,Critical,Featured contractor,"name,address,telephone,geo,aggregateRating",Local Pack
+Location,Service,Yes,High,Service offered in location,"serviceType,provider,areaServed",Service Result
+Location,Place,Yes,High,Geographic location,"name,geo,containedInPlace",Map Pack
+Location,BreadcrumbList,Yes,High,Page position,"itemListElement",Breadcrumbs
+Location,FAQPage,No,Medium,City-specific questions,"mainEntity",FAQ Rich Result
+Location,Article,No,Low,City guide content,"headline,author,datePublished",Article Rich Result
+Service,Service,Yes,Critical,Fence type service,"serviceType,provider,areaServed",Service Rich Result
+Service,LocalBusiness,Yes,High,Contractors offering service,"name,aggregateRating",Business Listings
+Service,HowTo,No,Medium,Installation guide,"name,step,totalTime",HowTo Rich Result
+Service,BreadcrumbList,Yes,High,Navigation path,"itemListElement",Breadcrumbs
+Service,FAQPage,No,Medium,Service FAQs,"mainEntity",FAQ Rich Result
+Service,OfferCatalog,No,Low,Pricing information,"name,itemListElement",Product Listings
+Contractor,LocalBusiness,Yes,Critical,Full business details,"all properties",Business Profile
+Contractor,Person,No,Medium,Owner/operator,"name,jobTitle,worksFor",Knowledge Panel
+Contractor,Service,Yes,High,Services offered,"serviceType,areaServed",Service Listings
+Contractor,AggregateRating,Yes,High,Overall rating,"ratingValue,reviewCount",Review Stars
+Contractor,Review,Yes,High,Customer reviews,"author,reviewRating,reviewBody",Review Snippets
+Contractor,ImageObject,No,Medium,Gallery photos,"contentUrl,description",Image Gallery
+Contractor,OfferCatalog,No,Medium,Service menu,"itemListElement",Services List
+Contractor,BreadcrumbList,Yes,High,Page hierarchy,"itemListElement",Breadcrumbs
+Contractor,VideoObject,No,Low,Video content,"name,thumbnailUrl,contentUrl",Video Rich Result
+Zoning,Article,Yes,Critical,Zoning information content,"headline,author,datePublished",Article Rich Result
+Zoning,FAQPage,Yes,High,Zoning FAQs,"mainEntity",FAQ Rich Result
+Zoning,HowTo,No,Medium,Permit process,"name,step,estimatedCost",HowTo Rich Result
+Zoning,GovernmentService,Yes,High,Township contact info,"serviceType,areaServed,provider",Government Contact
+Zoning,LocalBusiness,No,Low,Featured contractor,"name",Related Business
+Zoning,BreadcrumbList,Yes,High,Page position,"itemListElement",Breadcrumbs
+All,WebPage,Yes,High,Page metadata,"name,description,url,breadcrumb",None
+All,WebSite,Yes,High,Site context,"url,name",None
+All,Organization,Yes,High,Directory brand,"name,url,logo",Brand Signals
+Contact,ContactPage,Yes,Critical,Contact information,"name,mainContentOfPage",None
+Contact,LocalBusiness,Yes,High,Business contact,"telephone,email,address",Contact Info
+About,AboutPage,Yes,Critical,About the directory,"name,mainContentOfPage",None
+About,Organization,Yes,High,Company story,"name,description,founder",Knowledge Panel
+Blog,BlogPosting,Yes,Critical,Blog article content,"headline,author,datePublished",Article Rich Result
+Blog,Article,Yes,High,Article markup,"articleBody,publisher",Article Features
+Blog,Person,No,Medium,Author info,"name,description,image",Author Bylines

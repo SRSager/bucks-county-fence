@@ -1,0 +1,77 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const testimonials = [
+  {
+    author: "Sarah Johnson",
+    location: "Doylestown, PA",
+    rating: 5,
+    text: "Bucks County Fence transformed our backyard! The cedar privacy fence looks amazing and the crew was professional and efficient. Highly recommend!",
+  },
+  {
+    author: "Michael Chen",
+    location: "Newtown, PA",
+    rating: 5,
+    text: "Got quotes from 3 companies and Bucks County Fence was the best value. The vinyl fence installation was flawless. Great communication throughout.",
+  },
+  {
+    author: "Jennifer Miller",
+    location: "Warminster, PA",
+    rating: 5,
+    text: "Our aluminum fence for the pool area is perfect. The team handled all the permits and the work was completed on schedule. Couldn't be happier!",
+  },
+];
+
+function renderStars(rating: number) {
+  return Array.from({ length: 5 }, (_, i) => ({
+    filled: i < rating,
+  }));
+}
+---
+
+<section class="py-20 bg-muted">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4">
+        What Our Customers Say
+      </h2>
+      <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+        Don't just take our word for it. Here's what homeowners across Bucks County have to say about our fence installation services.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      {testimonials.map((testimonial) => (
+        <div class="card bg-base-100 shadow-lg">
+          <div class="card-body">
+            <div class="flex gap-1 mb-4">
+              {renderStars(testimonial.rating).map((star) => (
+                <Icon 
+                  name="lucide:star" 
+                  class={`w-5 h-5 ${star.filled ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}`}
+                />
+              ))}
+            </div>
+            <p class="text-foreground mb-6 italic">"{testimonial.text}"</p>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-semibold">
+                {testimonial.author.charAt(0)}
+              </div>
+              <div>
+                <p class="font-semibold text-foreground">{testimonial.author}</p>
+                <p class="text-sm text-muted-foreground">{testimonial.location}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="text-center mt-12">
+      <a href="/testimonials" class="btn btn-outline btn-primary">
+        Read More Reviews
+        <Icon name="lucide:arrow-right" class="w-4 h-4 ml-2" />
+      </a>
+    </div>
+  </div>
+</section>

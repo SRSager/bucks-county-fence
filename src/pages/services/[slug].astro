@@ -1,0 +1,108 @@
+---
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SEO } from 'astro-seo';
+import { Icon } from 'astro-icon/components';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const services = await getCollection('services');
+  return services.map((service) => ({
+    params: { slug: service.slug },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+const { Content } = await service.render();
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<SEO
+			title={`${service.data.title} | Bucks County Fence`}
+			description={service.data.description}
+		/>
+		<title>{service.data.title} | Bucks County Fence</title>
+	</head>
+	<body class="min-h-screen bg-background">
+		<Header />
+		<main>
+			<!-- Page Header -->
+			<section class="bg-primary text-primary-foreground py-20">
+				<div class="container mx-auto px-4 text-center">
+					<h1 class="text-4xl md:text-5xl font-bold mb-4">{service.data.title}</h1>
+					<p class="text-xl opacity-90 max-w-2xl mx-auto">
+						{service.data.description}
+					</p>
+					{service.data.priceRange && (
+						<div class="mt-6">
+							<span class="badge badge-secondary text-lg px-4 py-2">
+								Price Range: {service.data.priceRange}
+							</span>
+						</div>
+					)}
+				</div>
+			</section>
+
+			<!-- Service Content -->
+			<section class="py-16">
+				<div class="container mx-auto px-4">
+					<div class="grid lg:grid-cols-3 gap-12">
+						<!-- Main Content -->
+						<div class="lg:col-span-2">
+							<div class="prose prose-lg max-w-none">
+								<Content />
+							</div>
+						</div>
+
+						<!-- Sidebar -->
+						<div class="space-y-6">
+							<!-- CTA Card -->
+							<div class="card bg-primary text-primary-foreground">
+								<div class="card-body">
+									<h3 class="card-title">Ready to Get Started?</h3>
+									<p class="mb-4">Get a free estimate for your {service.data.title.toLowerCase()} project.</p>
+									<a href="/contact" class="btn btn-secondary w-full">
+										Request Quote
+									</a>
+								</div>
+							</div>
+
+							<!-- Features -->
+							<div class="card bg-base-100 shadow-lg">
+								<div class="card-body">
+									<h3 class="card-title text-lg mb-4">Why Choose Us</h3>
+									<ul class="space-y-3">
+										<li class="flex items-center gap-2">
+											<Icon name="lucide:check" class="w-5 h-5 text-primary" />
+											<span>Licensed & Insured</span>
+										</li>
+										<li class="flex items-center gap-2">
+											<Icon name="lucide:check" class="w-5 h-5 text-primary" />
+											<span>Quality Materials</span>
+										</li>
+										<li class="flex items-center gap-2">
+											<Icon name="lucide:check" class="w-5 h-5 text-primary" />
+											<span>Expert Installation</span>
+										</li>
+										<li class="flex items-center gap-2">
+											<Icon name="lucide:check" class="w-5 h-5 text-primary" />
+											<span>Warranty Included</span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>

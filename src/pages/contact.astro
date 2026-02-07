@@ -1,0 +1,159 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SEO } from 'astro-seo';
+import { Icon } from 'astro-icon/components';
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<SEO
+			title="Contact Us | Bucks County Fence"
+			description="Get a free fence estimate in Bucks County, PA. Call (215) 555-1234 or fill out our contact form. Serving Doylestown, Newtown, and surrounding areas."
+		/>
+		<title>Contact Us | Bucks County Fence</title>
+	</head>
+	<body class="min-h-screen bg-background">
+		<Header />
+		<main>
+			<!-- Page Header -->
+			<section class="bg-primary text-primary-foreground py-20">
+				<div class="container mx-auto px-4 text-center">
+					<h1 class="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
+					<p class="text-xl opacity-90 max-w-2xl mx-auto">
+						Get your free estimate today
+					</p>
+				</div>
+			</section>
+
+			<!-- Contact Section -->
+			<section class="py-16">
+				<div class="container mx-auto px-4">
+					<div class="grid lg:grid-cols-2 gap-12">
+						<!-- Contact Info -->
+						<div>
+							<h2 class="text-3xl font-bold mb-6">Get in Touch</h2>
+							<p class="text-muted-foreground mb-8">
+								Ready to start your fencing project? Contact us for a free consultation and estimate. 
+								We typically respond within 24 hours.
+							</p>
+
+							<div class="space-y-6">
+								<div class="flex items-start gap-4">
+									<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+										<Icon name="lucide:phone" class="w-6 h-6 text-primary" />
+									</div>
+									<div>
+										<h3 class="font-semibold">Phone</h3>
+										<p class="text-muted-foreground">(215) 555-1234</p>
+										<p class="text-sm text-muted-foreground">Mon-Fri: 8am-6pm, Sat: 9am-2pm</p>
+									</div>
+								</div>
+
+								<div class="flex items-start gap-4">
+									<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+										<Icon name="lucide:mail" class="w-6 h-6 text-primary" />
+									</div>
+									<div>
+										<h3 class="font-semibold">Email</h3>
+										<p class="text-muted-foreground">info@buckscountyfence.com</p>
+									</div>
+								</div>
+
+								<div class="flex items-start gap-4">
+									<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+										<Icon name="lucide:map-pin" class="w-6 h-6 text-primary" />
+									</div>
+									<div>
+										<h3 class="font-semibold">Address</h3>
+										<p class="text-muted-foreground">123 Main Street</p>
+										<p class="text-muted-foreground">Doylestown, PA 18901</p>
+									</div>
+								</div>
+							</div>
+
+							<!-- Social Links -->
+							<div class="mt-8">
+								<h3 class="font-semibold mb-4">Follow Us</h3>
+								<div class="flex gap-4">
+									<a href="#" class="w-10 h-10 bg-muted rounded-full flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors">
+										<Icon name="lucide:facebook" class="w-5 h-5" />
+									</a>
+									<a href="#" class="w-10 h-10 bg-muted rounded-full flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors">
+										<Icon name="mdi:instagram" class="w-5 h-5" />
+									</a>
+									<a href="#" class="w-10 h-10 bg-muted rounded-full flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors">
+										<Icon name="mdi:yelp" class="w-5 h-5" />
+									</a>
+								</div>
+							</div>
+						</div>
+
+						<!-- Contact Form -->
+						<div class="card bg-base-100 shadow-xl">
+							<div class="card-body">
+								<h3 class="card-title text-2xl mb-6">Request a Free Estimate</h3>
+								<form name="contact" method="POST" data-netlify="true" class="space-y-4">
+									<input type="hidden" name="form-name" value="contact" />
+									
+									<div class="form-control">
+										<label class="label" for="name">
+											<span class="label-text">Full Name *</span>
+										</label>
+										<input type="text" id="name" name="name" class="input input-bordered w-full" required />
+									</div>
+
+									<div class="grid grid-cols-2 gap-4">
+										<div class="form-control">
+											<label class="label" for="email">
+												<span class="label-text">Email *</span>
+											</label>
+											<input type="email" id="email" name="email" class="input input-bordered w-full" required />
+										</div>
+										<div class="form-control">
+											<label class="label" for="phone">
+												<span class="label-text">Phone *</span>
+											</label>
+											<input type="tel" id="phone" name="phone" class="input input-bordered w-full" required />
+										</div>
+									</div>
+
+									<div class="form-control">
+										<label class="label" for="service">
+											<span class="label-text">Service Interested In</span>
+										</label>
+										<select id="service" name="service" class="select select-bordered w-full">
+											<option value="">Select a service...</option>
+											<option value="wood">Wood Fencing</option>
+											<option value="vinyl">Vinyl Fencing</option>
+											<option value="aluminum">Aluminum Fencing</option>
+											<option value="chain-link">Chain Link Fencing</option>
+											<option value="custom">Custom/Other</option>
+										</select>
+									</div>
+
+									<div class="form-control">
+										<label class="label" for="message">
+											<span class="label-text">Message</span>
+										</label>
+										<textarea id="message" name="message" rows="4" class="textarea textarea-bordered w-full" placeholder="Tell us about your project..."></textarea>
+									</div>
+
+									<button type="submit" class="btn btn-primary w-full">
+										Send Message
+									</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>

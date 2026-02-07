@@ -1,0 +1,90 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const locations = [
+  { name: "Doylestown", description: "County seat with historic charm", contractors: 12, slug: "doylestown" },
+  { name: "Newtown", description: "Quaint borough with colonial roots", contractors: 8, slug: "newtown" },
+  { name: "Warminster", description: "Suburban community near Philadelphia", contractors: 10, slug: "warminster" },
+  { name: "Bensalem", description: "Largest township in Bucks County", contractors: 15, slug: "bensalem" },
+  { name: "Levittown", description: "Planned community with family homes", contractors: 14, slug: "levittown" },
+  { name: "Quakertown", description: "Upper Bucks manufacturing hub", contractors: 9, slug: "quakertown" },
+  { name: "Morrisville", description: "Riverside town on the Delaware", contractors: 7, slug: "morrisville" },
+  { name: "Yardley", description: "Scenic Delaware River borough", contractors: 6, slug: "yardley" },
+  { name: "New Hope", description: "Arts community and tourist destination", contractors: 5, slug: "new-hope" },
+  { name: "Perkasie", description: "Growing community in Upper Bucks", contractors: 8, slug: "perkasie" },
+  { name: "Chalfont", description: "Quiet residential township", contractors: 6, slug: "chalfont" },
+  { name: "Warrington", description: "Central Bucks suburban area", contractors: 11, slug: "warrington" },
+  { name: "Langhorne", description: "Historic borough near Neshaminy", contractors: 8, slug: "langhorne" },
+  { name: "Croydon", description: "Riverside community on the Delaware", contractors: 9, slug: "croydon" },
+  { name: "Middletown", description: "Township with suburban charm", contractors: 10, slug: "middletown" },
+];
+---
+
+<section id="locations" class="py-20 bg-slate-50">
+  <div class="container mx-auto px-4">
+    <!-- Section Header -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Find Fence Contractors by Location</h2>
+      <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+        Browse fence installation professionals serving your area in Bucks County, Pennsylvania.
+      </p>
+    </div>
+
+    <!-- Locations Grid -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 max-w-6xl mx-auto">
+      {locations.map(location => (
+        <a 
+          href={`/locations/${location.slug}/`}
+          class="group bg-white rounded-xl p-5 border border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all duration-200"
+        >
+          <div class="flex items-start justify-between mb-3">
+            <h3 class="font-semibold text-slate-900 group-hover:text-blue-600 transition-colors text-base">{location.name}</h3>
+            <Icon name="lucide:arrow-up-right" class="w-4 h-4 text-slate-400 group-hover:text-blue-500 transition-colors" />
+          </div>
+          <div class="flex items-center gap-1.5 text-sm text-blue-600">
+            <Icon name="lucide:hard-hat" class="w-4 h-4" />
+            <span>{location.contractors} contractors</span>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- View All Link -->
+    <div class="text-center mt-10">
+      <a 
+        href="/locations/" 
+        class="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium transition-colors"
+      >
+        <span>View all locations in Bucks County</span>
+        <Icon name="lucide:arrow-right" class="w-4 h-4" />
+      </a>
+    </div>
+
+    <!-- County Info -->
+    <div class="mt-16 bg-white rounded-2xl p-8 border border-slate-200 max-w-4xl mx-auto">
+      <div class="grid md:grid-cols-3 gap-8 text-center">
+        <div>
+          <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+            <Icon name="lucide:map-pin" class="w-6 h-6 text-blue-600" />
+          </div>
+          <div class="text-3xl font-bold text-slate-900 mb-1">54</div>
+          <div class="text-sm text-slate-600">Municipalities</div>
+        </div>
+        <div>
+          <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+            <Icon name="lucide:users" class="w-6 h-6 text-green-600" />
+          </div>
+          <div class="text-3xl font-bold text-slate-900 mb-1">650K+</div>
+          <div class="text-sm text-slate-600">Population</div>
+        </div>
+        <div>
+          <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+            <Icon name="lucide:home" class="w-6 h-6 text-amber-600" />
+          </div>
+          <div class="text-3xl font-bold text-slate-900 mb-1">622</div>
+          <div class="text-sm text-slate-600">Square Miles</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

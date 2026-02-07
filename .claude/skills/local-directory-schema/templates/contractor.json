@@ -1,0 +1,136 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LocalBusiness",
+      "@id": "{{pageUrl}}/#localbusiness",
+      "name": "{{contractor.name}}",
+      "description": "{{contractor.description}}",
+      "url": "{{pageUrl}}",
+      "telephone": "{{contractor.phone}}",
+      "email": "{{contractor.email}}",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "{{contractor.street}}",
+        "addressLocality": "{{contractor.city}}",
+        "addressRegion": "{{stateCode}}",
+        "postalCode": "{{contractor.zip}}",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "{{contractor.lat}}",
+        "longitude": "{{contractor.lng}}"
+      },
+      "serviceArea": {
+        "@type": "GeoCircle",
+        "geoMidpoint": {
+          "@type": "GeoCoordinates",
+          "latitude": "{{contractor.lat}}",
+          "longitude": "{{contractor.lng}}"
+        },
+        "geoRadius": "{{contractor.serviceRadius}}"
+      },
+      "areaServed": [
+        {{#contractor.serviceCities}}
+        {
+          "@type": "City",
+          "name": "{{name}}"
+        }{{^isLast}},{{/isLast}}
+        {{/contractor.serviceCities}}
+      ],
+      "openingHours": [
+        {{#contractor.hours}}
+        "{{day}} {{open}}-{{close}}"{{^isLast}},{{/isLast}}
+        {{/contractor.hours}}
+      ],
+      "priceRange": "{{contractor.priceRange}}",
+      "paymentAccepted": ["Cash", "Credit Card", "Check", "Financing Available"],
+      "currenciesAccepted": "USD",
+      "foundingDate": "{{contractor.founded}}",
+      "numberOfEmployees": "{{contractor.employees}}",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Services",
+        "itemListElement": [
+          {{#contractor.services}}
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "{{name}}",
+              "description": "{{description}}"
+            }{{#price}},
+            "price": "{{price}}",
+            "priceUnit": "{{unit}}"{{/price}}
+          }{{^isLast}},{{/isLast}}
+          {{/contractor.services}}
+        ]
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "{{contractor.rating}}",
+        "reviewCount": "{{contractor.reviewCount}}",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "review": [
+        {{#contractor.reviews}}
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "{{author}}"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "{{rating}}"
+          },
+          "reviewBody": "{{body}}",
+          "datePublished": "{{date}}"
+        }{{^isLast}},{{/isLast}}
+        {{/contractor.reviews}}
+      ],
+      "image": [
+        {{#contractor.images}}
+        {
+          "@type": "ImageObject",
+          "contentUrl": "{{url}}",
+          "description": "{{alt}}",
+          "width": {{width}},
+          "height": {{height}}
+        }{{^isLast}},{{/isLast}}
+        {{/contractor.images}}
+      ],
+      "sameAs": [
+        {{#contractor.social}}
+        "{{url}}"{{^isLast}},{{/isLast}}
+        {{/contractor.social}}
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "{{pageUrl}}/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "{{siteUrl}}/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Contractors",
+          "item": "{{siteUrl}}/contractors/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "{{contractor.name}}",
+          "item": "{{pageUrl}}"
+        }
+      ]
+    }
+  ]
+}

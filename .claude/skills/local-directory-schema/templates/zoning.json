@@ -1,0 +1,164 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "{{pageUrl}}/#article",
+      "headline": "Fence Zoning Regulations in {{townshipName}}, {{countyName}}",
+      "description": "Complete guide to fence permits, height restrictions, and zoning rules in {{townshipName}}",
+      "image": "{{featuredImage}}",
+      "datePublished": "{{publishDate}}",
+      "dateModified": "{{modifiedDate}}",
+      "author": {
+        "@type": "Organization",
+        "name": "{{siteName}}",
+        "url": "{{siteUrl}}"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "{{siteName}}",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{{siteUrl}}/logo.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{pageUrl}}"
+      }
+    },
+    {
+      "@type": "GovernmentService",
+      "@id": "{{pageUrl}}/#government",
+      "name": "{{townshipName}} Zoning Office",
+      "serviceType": "Fence Permit Application",
+      "areaServed": {
+        "@type": "City",
+        "name": "{{townshipName}}",
+        "containedInPlace": {
+          "@type": "County",
+          "name": "{{countyName}}"
+        }
+      },
+      "provider": {
+        "@type": "GovernmentOrganization",
+        "name": "{{townshipName}} Township",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "{{townshipAddress}}",
+          "addressLocality": "{{townshipCity}}",
+          "addressRegion": "{{stateCode}}",
+          "postalCode": "{{townshipZip}}"
+        },
+        "telephone": "{{townshipPhone}}",
+        "url": "{{townshipWebsite}}"
+      }
+    },
+    {
+      "@type": "HowTo",
+      "@id": "{{pageUrl}}/#howto",
+      "name": "How to Get a Fence Permit in {{townshipName}}",
+      "description": "Step-by-step process for obtaining a fence permit in {{townshipName}}",
+      "estimatedCost": {
+        "@type": "MonetaryAmount",
+        "currency": "USD",
+        "value": "{{permitFee}}"
+      },
+      "totalTime": "{{permitTime}}",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Review Zoning Regulations",
+          "text": "Check {{townshipName}}'s fence ordinance for height and setback requirements."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Prepare Your Application",
+          "text": "Complete the fence permit application with property details and fence specifications."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Submit Required Documents",
+          "text": "Include site plan, fence specifications, and contractor information if applicable."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Pay Permit Fee",
+          "text": "Submit payment for the permit fee at the township office."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "name": "Wait for Approval",
+          "text": "Allow {{permitTime}} for the zoning officer to review your application."
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "{{pageUrl}}/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do I need a permit for a fence in {{townshipName}}?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "{{permitRequiredAnswer}}"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the maximum fence height allowed?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "{{maxHeightAnswer}}"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How close to the property line can I build?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "{{setbackAnswer}}"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does it take to get a permit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "{{permitTimeframeAnswer}}"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "{{pageUrl}}/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "{{siteUrl}}/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Zoning",
+          "item": "{{siteUrl}}/zoning/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "{{townshipName}}",
+          "item": "{{pageUrl}}"
+        }
+      ]
+    }
+  ]
+}

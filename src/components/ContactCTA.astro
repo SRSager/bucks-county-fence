@@ -1,0 +1,38 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<section class="py-20 bg-primary text-primary-foreground">
+  <div class="container mx-auto px-4 text-center">
+    <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Get Started?</h2>
+    <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+      Contact us today for a free, no-obligation quote on your fencing project. We serve all of Bucks County, PA.
+    </p>
+    
+    <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
+      <a href="tel:+12155551234" class="btn btn-secondary btn-lg">
+        <Icon name="lucide:phone" class="w-5 h-5 mr-2" />
+        (215) 555-1234
+      </a>
+      <a href="/contact" class="btn btn-outline btn-secondary btn-lg">
+        <Icon name="lucide:mail" class="w-5 h-5 mr-2" />
+        Request Quote Online
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto text-sm">
+      <div class="flex flex-col items-center gap-2">
+        <Icon name="lucide:map-pin" class="w-6 h-6" />
+        <span>Bucks County, PA</span>
+      </div>
+      <div class="flex flex-col items-center gap-2">
+        <Icon name="lucide:clock" class="w-6 h-6" />
+        <span>Mon-Fri: 8AM-6PM<br />Sat: 9AM-4PM</span>
+      </div>
+      <div class="flex flex-col items-center gap-2">
+        <Icon name="lucide:shield-check" class="w-6 h-6" />
+        <span>Fully Licensed & Insured</span>
+      </div>
+    </div>
+  </div>
+</section>

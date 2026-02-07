@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content';
+import { Icon } from 'astro-icon/components';
+
+const services = await getCollection('services');
+const sortedServices = services.sort((a, b) => a.data.order - b.data.order);
+---
+
+<section class="py-20 bg-base-100">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Fencing Services</h2>
+      <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+        From classic wood to modern vinyl, we install and repair all types of fences for residential and commercial properties.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {sortedServices.map((service) => (
+        <div class="card bg-base-200 hover:shadow-xl transition-shadow">
+          <figure class="h-32 bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+            <Icon name="lucide:home" class="w-16 h-16 text-primary/40" />
+          </figure>
+          <div class="card-body">
+            <div class="flex items-start justify-between mb-4">
+              <h3 class="card-title text-xl">{service.data.title}</h3>
+              {service.data.priceRange && (
+                <span class="badge badge-primary">{service.data.priceRange}</span>
+              )}
+            </div>
+            <p class="text-muted-foreground mb-4">{service.data.description}</p>
+            <div class="card-actions justify-end">
+              <a href={`/services/${service.slug}`} class="btn btn-primary btn-sm">
+                Learn More
+                <Icon name="lucide:arrow-right" class="w-4 h-4 ml-1" />
+              </a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="text-center mt-12">
+      <a href="/services" class="btn btn-outline btn-lg">
+        View All Services
+        <Icon name="lucide:arrow-right" class="w-5 h-5 ml-2" />
+      </a>
+    </div>
+  </div>
+</section>

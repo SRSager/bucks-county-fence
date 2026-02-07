@@ -1,0 +1,40 @@
+---
+import { SEO } from 'astro-seo';
+import '../app.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const { 
+  title = "Bucks County Fence | Quality Fencing Installation",
+  description = "Professional fence installation in Bucks County, PA. Wood, vinyl, aluminum, and chain-link fences. Free estimates! Serving homeowners and businesses since 1995.",
+  image = "/og-image.jpg"
+} = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/bucks-county-fence-favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<SEO
+			title={title}
+			description={description}
+			openGraph={{
+				basic: {
+					title: title,
+					type: "website",
+					image: image,
+				}
+			}}
+		/>
+		<title>{title}</title>
+	</head>
+	<body class="min-h-screen bg-background font-sans antialiased">
+		<slot />
+	</body>
+</html>

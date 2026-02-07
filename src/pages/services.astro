@@ -1,0 +1,115 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SEO } from 'astro-seo';
+import { Icon } from 'astro-icon/components';
+import { getCollection } from 'astro:content';
+
+const services = await getCollection('services');
+const sortedServices = services.sort((a, b) => a.data.order - b.data.order);
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<SEO
+			title="Our Services | Bucks County Fence"
+			description="Professional fence installation services in Bucks County, PA. Wood, vinyl, aluminum, chain-link fences and more. Free estimates available."
+		/>
+		<title>Our Services | Bucks County Fence</title>
+	</head>
+	<body class="min-h-screen bg-background">
+		<Header />
+		<main>
+			<!-- Page Header -->
+			<section class="bg-primary text-primary-foreground py-20">
+				<div class="container mx-auto px-4 text-center">
+					<h1 class="text-4xl md:text-5xl font-bold mb-4">Our Fencing Services</h1>
+					<p class="text-xl opacity-90 max-w-2xl mx-auto">
+						Quality fence installation for every need and budget
+					</p>
+				</div>
+			</section>
+
+			<!-- Services Grid -->
+			<section class="py-16">
+				<div class="container mx-auto px-4">
+					<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+						{sortedServices.map((service) => (
+							<div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
+								<figure class="h-48 bg-muted flex items-center justify-center">
+									<span class="text-muted-foreground">{service.data.title} Image</span>
+								</figure>
+								<div class="card-body">
+									<h2 class="card-title">{service.data.title}</h2>
+									<p class="text-muted-foreground">{service.data.description}</p>
+									{service.data.priceRange && (
+										<div class="badge badge-primary mt-2">{service.data.priceRange}</div>
+									)}
+									<div class="card-actions justify-end mt-4">
+										<a href={`/services/${service.slug}`} class="btn btn-primary btn-sm">
+											Learn More
+										</a>
+									</div>
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+			</section>
+
+			<!-- Process Section -->
+			<section class="py-16 bg-muted/50">
+				<div class="container mx-auto px-4">
+					<h2 class="text-3xl font-bold text-center mb-12">Our Process</h2>
+					<div class="grid md:grid-cols-4 gap-8">
+						<div class="text-center">
+							<div class="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">1</div>
+							<h3 class="font-semibold mb-2">Free Consultation</h3>
+							<p class="text-sm text-muted-foreground">We discuss your needs and provide expert recommendations</p>
+						</div>
+						<div class="text-center">
+							<div class="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">2</div>
+							<h3 class="font-semibold mb-2">Site Survey</h3>
+							<p class="text-sm text-muted-foreground">We measure and assess your property for optimal installation</p>
+						</div>
+						<div class="text-center">
+							<div class="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">3</div>
+							<h3 class="font-semibold mb-2">Custom Quote</h3>
+							<p class="text-sm text-muted-foreground">Detailed, transparent pricing with no hidden fees</p>
+						</div>
+						<div class="text-center">
+							<div class="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">4</div>
+							<h3 class="font-semibold mb-2">Expert Installation</h3>
+							<p class="text-sm text-muted-foreground">Professional installation by our experienced team</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- CTA -->
+			<section class="py-16">
+				<div class="container mx-auto px-4 text-center">
+					<h2 class="text-3xl font-bold mb-4">Ready to Get Started?</h2>
+					<p class="text-muted-foreground mb-8 max-w-2xl mx-auto">
+						Contact us today for a free consultation and estimate. We'll help you find the perfect fencing solution for your property.
+					</p>
+					<div class="flex flex-col sm:flex-row gap-4 justify-center">
+						<a href="tel:+12155551234" class="btn btn-primary btn-lg">
+							<Icon name="lucide:phone" class="w-5 h-5 mr-2" />
+							Call (215) 555-1234
+						</a>
+						<a href="/contact" class="btn btn-outline btn-lg">
+							Request Quote
+						</a>
+					</div>
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>

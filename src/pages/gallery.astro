@@ -1,0 +1,72 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SEO } from 'astro-seo';
+import { getCollection } from 'astro:content';
+
+const galleryItems = await getCollection('gallery');
+const categories = ['all', 'wood', 'vinyl', 'aluminum', 'chain-link', 'custom'];
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<SEO
+			title="Project Gallery | Bucks County Fence"
+			description="View our completed fence projects in Bucks County, PA. Wood, vinyl, aluminum, and chain-link fence installations."
+		/>
+		<title>Project Gallery | Bucks County Fence</title>
+	</head>
+	<body class="min-h-screen bg-background">
+		<Header />
+		<main>
+			<!-- Page Header -->
+			<section class="bg-primary text-primary-foreground py-20">
+				<div class="container mx-auto px-4 text-center">
+					<h1 class="text-4xl md:text-5xl font-bold mb-4">Our Work</h1>
+					<p class="text-xl opacity-90 max-w-2xl mx-auto">
+						Browse our completed fence installations
+					</p>
+				</div>
+			</section>
+
+			<!-- Gallery Grid -->
+			<section class="py-16">
+				<div class="container mx-auto px-4">
+					<!-- Filter Buttons -->
+					<div class="flex flex-wrap justify-center gap-2 mb-12">
+						{categories.map((cat) => (
+							<button class="btn btn-sm btn-outline capitalize">{cat}</button>
+						))}
+					</div>
+
+					<!-- Gallery -->
+					<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+						{galleryItems.map((item) => (
+							<div class="card bg-base-100 shadow-lg overflow-hidden group">
+								<figure class="relative h-64 bg-muted">
+									<span class="text-muted-foreground">{item.data.title} Image</span>
+									<div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+										<span class="text-white font-semibold">View Project</span>
+									</div>
+								</figure>
+								<div class="card-body">
+									<h3 class="card-title text-lg">{item.data.title}</h3>
+									<div class="badge badge-outline capitalize">{item.data.category}</div>
+									{item.data.location && (
+										<p class="text-sm text-muted-foreground mt-2">{item.data.location}</p>
+									)}
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>

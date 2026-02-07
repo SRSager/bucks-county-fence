@@ -1,0 +1,132 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { Icon } from 'astro-icon/components';
+---
+
+<Layout title="About Us | Bucks County Fence" description="Learn about Bucks County Fence - your trusted local fencing company serving Pennsylvania since 1995.">
+	<Header />
+	<main>
+			<!-- Page Header -->
+			<section class="bg-primary text-primary-foreground py-20">
+				<div class="container mx-auto px-4 text-center">
+					<h1 class="text-4xl md:text-5xl font-bold mb-4">About Bucks County Fence</h1>
+					<p class="text-xl opacity-90 max-w-2xl mx-auto">
+						Your trusted local fencing experts since 1995
+					</p>
+				</div>
+			</section>
+
+			<!-- Our Story -->
+			<section class="py-16">
+				<div class="container mx-auto px-4">
+					<div class="grid md:grid-cols-2 gap-12 items-center">
+						<div>
+							<h2 class="text-3xl font-bold mb-6">Our Story</h2>
+							<p class="text-muted-foreground mb-4">
+								Founded in 1995, Bucks County Fence began as a small family operation with a simple mission: 
+								provide quality fencing solutions at fair prices. What started as a one-truck operation 
+								has grown into one of the region's most trusted fencing companies.
+							</p>
+							<p class="text-muted-foreground mb-4">
+								For nearly three decades, we've served thousands of homeowners and businesses throughout 
+								Bucks County and the surrounding areas. Our commitment to craftsmanship, customer service, 
+								and community has never wavered.
+							</p>
+							<p class="text-muted-foreground">
+								Today, we're proud to be a second-generation family business, continuing the tradition 
+								of excellence that our customers have come to expect.
+							</p>
+						</div>
+						<div class="bg-muted rounded-lg h-80 flex items-center justify-center">
+							<span class="text-muted-foreground">Company Photo Placeholder</span>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Why Choose Us -->
+			<section class="py-16 bg-muted/50">
+				<div class="container mx-auto px-4">
+					<h2 class="text-3xl font-bold text-center mb-12">Why Choose Bucks County Fence</h2>
+					<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+						<div class="text-center">
+							<div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+								<Icon name="lucide:award" class="w-8 h-8 text-primary" />
+							</div>
+							<h3 class="font-semibold mb-2">Licensed & Insured</h3>
+							<p class="text-sm text-muted-foreground">Full coverage for your peace of mind</p>
+						</div>
+						<div class="text-center">
+							<div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+								<Icon name="lucide:clock" class="w-8 h-8 text-primary" />
+							</div>
+							<h3 class="font-semibold mb-2">29+ Years Experience</h3>
+							<p class="text-sm text-muted-foreground">Decades of fencing expertise</p>
+						</div>
+						<div class="text-center">
+							<div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+								<Icon name="lucide:shield-check" class="w-8 h-8 text-primary" />
+							</div>
+							<h3 class="font-semibold mb-2">Quality Guarantee</h3>
+							<p class="text-sm text-muted-foreground">Satisfaction guaranteed on every job</p>
+						</div>
+						<div class="text-center">
+							<div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+								<Icon name="lucide:heart" class="w-8 h-8 text-primary" />
+							</div>
+							<h3 class="font-semibold mb-2">Local & Family-Owned</h3>
+							<p class="text-sm text-muted-foreground">Supporting our community since 1995</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Service Area -->
+			<section class="py-16">
+				<div class="container mx-auto px-4">
+					<div class="grid md:grid-cols-2 gap-12 items-center">
+						<div class="order-2 md:order-1 bg-muted rounded-lg h-80 flex items-center justify-center">
+							<span class="text-muted-foreground">Service Area Map Placeholder</span>
+						</div>
+						<div class="order-1 md:order-2">
+							<h2 class="text-3xl font-bold mb-6">Our Service Area</h2>
+							<p class="text-muted-foreground mb-4">
+								We're proud to serve Bucks County and surrounding areas in Pennsylvania. 
+								Our local expertise means we understand the unique needs of homeowners 
+								in our community.
+							</p>
+							<div class="grid grid-cols-2 gap-4">
+								<div class="flex items-center gap-2">
+									<Icon name="lucide:map-pin" class="w-4 h-4 text-primary" />
+									<span>Doylestown</span>
+								</div>
+								<div class="flex items-center gap-2">
+									<Icon name="lucide:map-pin" class="w-4 h-4 text-primary" />
+									<span>Newtown</span>
+								</div>
+								<div class="flex items-center gap-2">
+									<Icon name="lucide:map-pin" class="w-4 h-4 text-primary" />
+									<span>Warminster</span>
+								</div>
+								<div class="flex items-center gap-2">
+									<Icon name="lucide:map-pin" class="w-4 h-4 text-primary" />
+									<span>Levittown</span>
+								</div>
+								<div class="flex items-center gap-2">
+									<Icon name="lucide:map-pin" class="w-4 h-4 text-primary" />
+									<span>Quakertown</span>
+								</div>
+								<div class="flex items-center gap-2">
+									<Icon name="lucide:map-pin" class="w-4 h-4 text-primary" />
+									<span>And more...</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+	<Footer />
+</Layout>

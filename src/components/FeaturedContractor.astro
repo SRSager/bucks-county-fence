@@ -1,0 +1,182 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const contractor = {
+  name: "Bucks Mont Fence",
+  tagline: "Your Trusted Local Fence Experts",
+  description: "Owned and operated by Clarke Ryncewicz, Bucks Mont Fence brings 15 years of expertise to residential and commercial fence installations throughout Bucks and Montgomery counties. From classic wood privacy fences to modern vinyl and ornamental aluminum, we deliver quality craftsmanship on every project.",
+  rating: 4.9,
+  reviewCount: 127,
+  yearsInBusiness: 15,
+  services: ["Wood Fences", "Vinyl Fences", "Aluminum Fences", "Chain Link", "Gate Installation"],
+  serviceAreas: ["Bucks County", "Montgomery County", "Lehigh County"],
+  highlights: [
+    { icon: "lucide:award", text: "Top Rated 2024" },
+    { icon: "lucide:shield-check", text: "Fully Licensed & Insured" },
+    { icon: "lucide:clock", text: "15+ Years Experience" },
+    { icon: "lucide:thumbs-up", text: "100% Satisfaction Guarantee" }
+  ]
+};
+
+const reviews = [
+  {
+    name: "Colleen B.",
+    rating: 5,
+    text: "Finding Bucks Mont Fence was truly a Godsend. We recently moved to the area and have a huge amount of varied fencing to do on our property including privacy fencing, horse rail, picket, deer fencing, etc. so I did my due diligence and was busy interviewing and looking into dozens of fence companies in this area. Let me save you the work and hassle – go with Bucks Mont Fence!!!",
+    image: "/images/bucks-mont-fence-review-1.jpg",
+    date: "December 2024"
+  },
+  {
+    name: "Scott G.",
+    rating: 5,
+    text: "Excellent job on our three-part project. Steve, the project manager, did a fantastic job making sure everything was taken care of and installed with precision. Highly recommend.",
+    image: "/images/bucks-mont-fence-review-2.jpg",
+    date: "November 2024"
+  },
+  {
+    name: "Becky B.",
+    rating: 5,
+    text: "Clarke & his team did the most incredible job when they installed my 6 ft privacy fence at my home. They only took a day to do the entire fence and I was shocked at how efficient and meticulous they were. They also beat every other price that I got from big name companies in the area. I have referred him to many clients and friends as well for their fence needs, and they all are extremely happy with the finished product too. Thank you CJ!",
+    image: "/images/bucks-mont-fence-review-3.jpg",
+    date: "October 2024"
+  }
+];
+---
+
+<section id="featured" class="py-20 bg-white">
+  <div class="container mx-auto px-4">
+    <!-- Section Header -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Our Featured Fence Company in Bucks County</h2>
+      <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+        We recommend Bucks Mont Fence as our trusted partner for quality fence installation throughout Bucks County.
+      </p>
+    </div>
+
+    <!-- Featured Card -->
+    <div class="max-w-5xl mx-auto">
+      <div class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
+        <!-- Main Contractor Info -->
+        <div class="p-8 lg:p-10">
+          <!-- Header -->
+          <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
+            <div class="flex items-center gap-4">
+              <img 
+                src="/images/bucks-mont-fence-logo.jpg" 
+                alt="Bucks Mont Fence Logo"
+                class="w-32 h-auto rounded-lg"
+              />
+              <div>
+                <h3 class="text-2xl md:text-3xl font-bold text-slate-900 mb-1">{contractor.name}</h3>
+                <p class="text-blue-600 font-medium">{contractor.tagline}</p>
+              </div>
+            </div>
+            <!-- Rating Badge -->
+            <div class="flex items-center gap-1 bg-amber-50 px-3 py-1.5 rounded-lg border border-amber-200 self-start">
+              <svg class="w-4 h-4 text-amber-500" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              <span class="font-semibold text-amber-700">{contractor.rating}</span>
+              <span class="text-amber-600 text-sm">({contractor.reviewCount})</span>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <p class="text-slate-600 mb-6 leading-relaxed">{contractor.description}</p>
+
+          <!-- Highlights -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+            {contractor.highlights.map(highlight => (
+              <div class="flex items-center gap-2 text-sm text-slate-700">
+                <Icon name={highlight.icon} class="w-4 h-4 text-blue-500" />
+                <span>{highlight.text}</span>
+              </div>
+            ))}
+          </div>
+
+          <!-- Services -->
+          <div class="mb-6">
+            <h4 class="text-sm font-semibold text-slate-900 mb-2">Services Offered:</h4>
+            <div class="flex flex-wrap gap-2">
+              {contractor.services.map(service => (
+                <span class="px-3 py-1 bg-slate-100 text-slate-700 text-sm rounded-full">{service}</span>
+              ))}
+            </div>
+          </div>
+
+          <!-- Service Areas -->
+          <div class="mb-6">
+            <h4 class="text-sm font-semibold text-slate-900 mb-2">Areas Served:</h4>
+            <div class="flex flex-wrap gap-2">
+              {contractor.serviceAreas.map(area => (
+                <span class="px-3 py-1 bg-blue-50 text-blue-700 text-sm rounded-full">{area}</span>
+              ))}
+            </div>
+          </div>
+
+          <!-- CTA Button -->
+          <div class="flex flex-wrap gap-3">
+            <a 
+              href="#contact"
+              class="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors"
+            >
+              <Icon name="lucide:message-circle" class="w-4 h-4" />
+              Get a Free Quote
+            </a>
+          </div>
+        </div>
+
+        <!-- Horizontal Reviews Bar -->
+        <div class="bg-slate-50 border-t border-slate-200 p-6 lg:p-8">
+          <h4 class="font-semibold text-slate-900 mb-4 flex items-center gap-2">
+            <Icon name="lucide:message-square-quote" class="w-5 h-5 text-blue-500" />
+            What Customers of Bucks Mont Fence Say
+          </h4>
+          
+          <div class="grid md:grid-cols-3 gap-4">
+            {reviews.map((review) => (
+              <div class="bg-white rounded-xl p-4 shadow-sm border border-slate-100">
+                <!-- Review Image -->
+                <img 
+                  src={review.image} 
+                  alt={`Fence installation for ${review.name}`}
+                  class="w-full h-48 rounded-lg object-cover mb-3"
+                />
+                
+                <!-- Rating -->
+                <div class="flex items-center gap-0.5 mb-2">
+                  {Array.from({ length: review.rating }).map(() => (
+                    <svg class="w-3 h-3 text-amber-500" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                  ))}
+                </div>
+                
+                <!-- Review Text -->
+                <p class="text-sm text-slate-700 mb-2">"{review.text}"</p>
+                
+                <!-- Reviewer Info -->
+                <div class="text-xs">
+                  <span class="font-medium text-slate-900">{review.name}</span>
+                  {review.location && (
+                    <>
+                      <span class="text-slate-400"> • </span>
+                      <span class="text-slate-500">{review.location}</span>
+                    </>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <!-- Aggregate Rating -->
+          <div class="mt-4 pt-4 border-t border-slate-200 flex items-center justify-center gap-1">
+            <div class="flex">
+              {Array.from({ length: 5 }).map(() => (
+                <svg class="w-4 h-4 text-amber-500" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              ))}
+            </div>
+            <span class="font-semibold text-slate-900">{contractor.rating}</span>
+            <span class="text-sm text-slate-500">from {contractor.reviewCount} verified reviews</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

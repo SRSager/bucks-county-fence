@@ -1,0 +1,120 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const faqs = [
+  {
+    question: "Do I need a permit to install a fence in Bucks County?",
+    answer: "Permit requirements vary by municipality in Bucks County. Most townships and boroughs require a permit for fence installation, especially for fences over 6 feet tall or in front yards. Check your specific municipality's zoning regulations, or consult with your chosen fence contractor who can guide you through the permit process. We have detailed zoning guides for each township on our website."
+  },
+  {
+    question: "How much does fence installation cost in Bucks County?",
+    answer: "Fence installation costs in Bucks County typically range from $15 to $50 per linear foot, depending on the material. Wood fences average $20-35/ft, vinyl $25-45/ft, aluminum $30-50/ft, and chain link $15-25/ft. Factors affecting price include fence height, terrain, gate installation, and removal of existing fencing. We recommend getting multiple quotes from our verified contractors."
+  },
+  {
+    question: "How long does it take to install a fence?",
+    answer: "Most residential fence installations in Bucks County are completed within 1-3 days once work begins. However, the total timeline from quote to completion is typically 2-4 weeks, accounting for permit approvals, material ordering, and weather conditions. Larger properties or complex installations may take longer. Your contractor will provide a specific timeline during the consultation."
+  },
+  {
+    question: "What type of fence is best for my property?",
+    answer: "The best fence depends on your needs: Wood offers classic beauty and privacy at moderate cost; vinyl provides low maintenance and durability; aluminum gives an elegant look with minimal upkeep; chain link is affordable and functional. Consider your priorities—privacy, security, aesthetics, maintenance, and budget. Our featured contractor offers free consultations to help you choose the right option."
+  },
+  {
+    question: "Can my fence contractor pull the permit for me?",
+    answer: "Yes, many fence contractors in Bucks County offer permit procurement as part of their service. This is often included in their installation package or available for a small fee. Having your contractor handle permits is convenient as they're familiar with local requirements and can ensure the application is complete. Be sure to ask about this service when getting quotes."
+  },
+  {
+    question: "What is the maximum fence height allowed in Bucks County?",
+    answer: "Fence height limits vary by municipality. Generally, backyard fences can be 6-8 feet tall, while front yard fences are limited to 3-4 feet. Corner lots often have additional visibility restrictions. Some HOAs also have their own guidelines. Check your specific township's zoning ordinance, or ask your contractor—quality professionals stay current on all local regulations."
+  },
+  {
+    question: "Do fence contractors in Bucks County offer warranties?",
+    answer: "Yes, reputable fence contractors typically offer warranties on both materials and workmanship. Material warranties vary by product—vinyl fences often have 20+ year warranties, while wood fence warranties may be shorter. Workmanship warranties commonly cover 1-5 years of installation quality. Always ask for warranty details in writing before signing a contract."
+  },
+  {
+    question: "How do I choose the right fence contractor?",
+    answer: "Look for these qualities: proper licensing and insurance, positive reviews and references, clear written estimates, warranty offerings, and local experience. Ask about their familiarity with your municipality's permit process. Get 2-3 quotes to compare pricing and scope. Our featured contractor, Bucks Mont Fence, meets all these criteria with 25+ years of local experience."
+  }
+];
+---
+
+<section class="py-20 bg-white">
+  <div class="container mx-auto px-4 max-w-4xl">
+    <!-- Section Header -->
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-sm font-medium mb-4">
+        <Icon name="lucide:help-circle" class="w-4 h-4" />
+        <span>FAQ</span>
+      </div>
+      <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Frequently Asked Questions</h2>
+      <p class="text-lg text-slate-600">
+        Common questions about fence installation in Bucks County, Pennsylvania.
+      </p>
+    </div>
+
+    <!-- Accordion -->
+    <div class="space-y-4">
+      {faqs.map((faq, index) => (
+        <div class="faq-item border border-slate-200 rounded-xl overflow-hidden">
+          <button
+            class="faq-trigger w-full flex items-center justify-between p-5 text-left bg-white hover:bg-slate-50 transition-colors"
+            aria-expanded="false"
+            aria-controls={`faq-answer-${index}`}
+          >
+            <span class="font-semibold text-slate-900 pr-4">{faq.question}</span>
+            <Icon name="lucide:chevron-down" class="w-5 h-5 text-slate-500 flex-shrink-0 faq-icon transition-transform" />
+          </button>
+          <div
+            id={`faq-answer-${index}`}
+            class="faq-answer hidden px-5 pb-5"
+          >
+            <p class="text-slate-600 leading-relaxed">{faq.answer}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Contact CTA -->
+    <div class="mt-12 text-center p-8 bg-slate-50 rounded-2xl border border-slate-200">
+      <h3 class="text-xl font-semibold text-slate-900 mb-2">Still have questions?</h3>
+      <p class="text-slate-600 mb-4">Contact our featured contractor for personalized assistance.</p>
+      <a 
+        href="tel:2155550123"
+        class="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors"
+      >
+        <Icon name="lucide:phone" class="w-4 h-4" />
+        Call Bucks Mont Fence
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Accordion functionality
+  document.querySelectorAll('.faq-trigger').forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+      const answer = trigger.nextElementSibling;
+      const icon = trigger.querySelector('.faq-icon');
+      
+      // Close all other items
+      document.querySelectorAll('.faq-trigger').forEach(otherTrigger => {
+        if (otherTrigger !== trigger) {
+          otherTrigger.setAttribute('aria-expanded', 'false');
+          otherTrigger.nextElementSibling.classList.add('hidden');
+          otherTrigger.querySelector('.faq-icon').style.transform = 'rotate(0deg)';
+        }
+      });
+      
+      // Toggle current item
+      trigger.setAttribute('aria-expanded', !isExpanded);
+      answer.classList.toggle('hidden');
+      icon.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
+    });
+  });
+</script>
+
+<style>
+  .faq-icon {
+    transition: transform 0.2s ease;
+  }
+</style>

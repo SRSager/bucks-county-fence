@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Background -->
+  <rect width="32" height="32" rx="6" fill="#2563eb"/>
+  
+  <!-- Fence Posts -->
+  <rect x="5" y="8" width="4" height="16" rx="1" fill="white"/>
+  <rect x="14" y="6" width="4" height="18" rx="1" fill="white"/>
+  <rect x="23" y="8" width="4" height="16" rx="1" fill="white"/>
+  
+  <!-- Horizontal Rails -->
+  <rect x="4" y="12" width="24" height="2" rx="1" fill="white" fill-opacity="0.9"/>
+  <rect x="4" y="20" width="24" height="2" rx="1" fill="white" fill-opacity="0.9"/>
+</svg>

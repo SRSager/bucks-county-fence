@@ -1,0 +1,9 @@
+Metric,Target,Good,Poor,Optimization,Measurement,Priority
+LCP,Largest Contentful Paint,< 2.5s,> 4.0s,Optimize hero images/preload fonts,Chrome DevTools/Lighthouse,Critical
+INP,Interaction to Next Paint,< 200ms,> 500ms,Minimize JS/use Islands Architecture,Chrome DevTools,Critical
+CLS,Cumulative Layout Shift,< 0.1,> 0.25,Set image dimensions/font-display swap,Chrome DevTools,Critical
+TTFB,Time to First Byte,< 600ms,> 1.8s,Static generation/CDN,WebPageTest,High
+FCP,First Contentful Paint,< 1.8s,> 3.0s,Preload critical resources,Chrome DevTools,High
+TBT,Total Blocking Time,< 200ms,> 600ms,Reduce main thread work,Lighthouse,High
+SI,Speed Index,< 3.4s,> 5.8s,Optimize above-fold content,Lighthouse,Medium
+FMP,First Meaningful Paint,< 2.0s,> 4.0s,Prioritize visible content,Lighthouse,Medium

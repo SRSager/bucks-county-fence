@@ -1,0 +1,39 @@
+Category,Rule,Description,Priority,Implementation,Impact,Testing
+Images,Use Astro Image Component,Astro's built-in <Image /> auto-optimizes with Sharp,High,"import { Image } from 'astro:assets'",Reduces image size 50-80%,Lighthouse Performance audit
+Images,Responsive Images,Generate multiple srcset sizes for different viewports,High,"widths={[400, 800, 1200]}",Optimizes for mobile/desktop,Lighthouse
+Images,WebP Format,Use WebP for all photos with AVIF fallback,High,format="webp",30% smaller than JPEG,Lighthouse
+Images,Lazy Loading,Defer offscreen images until needed,Medium,loading="lazy",Improves initial page load,LCP improvement
+Images,Placeholder Strategy,Use blur placeholder while loading,Medium,placeholder="blur",Better perceived performance,Visual inspection
+Images,Priority LCP Image,Mark above-fold images as priority,High,fetchpriority="high",Improves LCP score,LCP < 2.5s
+Islands,Client Load Directive,Hydrate immediately for critical interactivity,High,client:load,Instant hydration for nav/search,Interactivity
+Islands,Client Visible Directive,Hydrate when component enters viewport,High,client:visible,Reduces initial JS,INP < 200ms
+Islands,Client Idle Directive,Hydrate when browser is idle,Medium,client:idle,Low priority hydration,Main thread free
+Islands,Client Media Directive,Hydrate based on media query,Medium,client:media="(min-width: 768px)",Responsive hydration,Mobile performance
+Islands,Client Only Directive,Skip SSR for framework components,Low,client:only="react",Framework-specific rendering,Bundle size
+Fonts,Font Display Swap,Show fallback font immediately,High,font-display: swap,Eliminates FOIT,CLS < 0.1
+Fonts,Preload Critical Fonts,Preload above-fold fonts,High,<link rel="preload">,Faster font loading,FCP improvement
+Fonts,Font Subsetting,Only load needed character sets,Medium,unicode-range,Smaller font files,Lighthouse
+Fonts,Variable Fonts,Use single variable font file,Medium,"font-variation-settings",Reduced requests,Faster loading
+View Transitions,Enable Transitions,Add fade/slide between pages,Medium,transition:animate="fade",Smooth navigation,User experience
+View Transitions,Persistent Elements,Keep header/footer during transition,Medium,transition:name="header",Seamless nav,Visual polish
+View Transitions,Morph Elements,Transform elements between pages,Low,transition:name="card",Advanced animations,UX enhancement
+Prefetching,Hover Prefetch,Prefetch on link hover,High,data-astro-prefetch="hover",Faster navigation,Next page load
+Prefetching,Viewport Prefetch,Prefetch visible links,High,data-astro-prefetch="viewport",Proactive loading,Perceived speed
+Prefetching,Tap Prefetch,Prefetch on touchstart,High,data-astro-prefetch="tap",Mobile optimization,Mobile nav speed
+Build,Static Output,Generate static HTML files,High,output: 'static',Best performance,Build output
+Build,Asset Bundling,Bundle and minify assets,High,Default in Astro,Reduced requests,Network tab
+Build,Tree Shaking,Remove unused code,High,Default in Astro,Smaller bundles,Bundle analyzer
+Build,Code Splitting,Split by route automatically,High,Default in Astro,On-demand loading,Route chunks
+Content Collections,Type Safety,Use zod schemas for content,Medium,defineCollection,Error prevention,Type checking
+Content Collections,Query Optimization,Filter at build time not runtime,High,getCollection with filter,Faster builds,Build time
+Content Collections,Reference Resolution,Link related content efficiently,Medium,reference() helper,Optimized queries,Memory usage
+Directory,Paginate Listings,Split long lists into pages,High,getStaticPaths with pagination,Faster initial load,Time to interactive
+Directory,Virtual Scrolling,Render only visible items,Medium,Virtual list library,Memory efficiency,Scroll performance
+Directory,Image Placeholders,Show blur-up for contractor photos,Medium,placeholder="blur",Perceived performance,Visual feedback
+Directory,Map Lazy Loading,Defer map loading until visible,Medium,client:visible on map component,Faster LCP,Above-fold priority
+SEO,Meta Preconnect,Preconnect to external domains,High,<link rel="preconnect">,Faster third-party,Resource timing
+SEO,Preload Critical CSS,Inline critical styles,Medium,Critical CSS extraction,Faster render,Render blocking
+SEO,Canonical URLs,Prevent duplicate content,High,<link rel="canonical">,SEO best practices,Indexing
+Multi-Site,Shared Components,Maintain common components in package,High,Monorepo structure,Consistent updates,All counties
+Multi-Site,Environment Config,County-specific settings via env,Medium,import.meta.env,Easy cloning,Configuration
+Multi-Site,Content Namespacing,Organize by county in content/,High,src/content/[county]/,Scalable structure,Content organization

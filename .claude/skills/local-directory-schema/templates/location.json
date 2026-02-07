@@ -1,0 +1,115 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Place",
+      "@id": "{{pageUrl}}/#place",
+      "name": "{{cityName}}, {{countyName}}",
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "{{cityLat}}",
+        "longitude": "{{cityLng}}"
+      },
+      "containedInPlace": {
+        "@type": "County",
+        "name": "{{countyName}}",
+        "containedInPlace": {
+          "@type": "State",
+          "name": "{{stateName}}"
+        }
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "{{pageUrl}}/#service",
+      "serviceType": "Fence Installation",
+      "provider": {
+        "@type": "LocalBusiness",
+        "@id": "{{featuredContractor.url}}/#localbusiness",
+        "name": "{{featuredContractor.name}}",
+        "description": "{{featuredContractor.description}}",
+        "url": "{{featuredContractor.url}}",
+        "telephone": "{{featuredContractor.phone}}",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "{{featuredContractor.street}}",
+          "addressLocality": "{{featuredContractor.city}}",
+          "addressRegion": "{{stateCode}}",
+          "postalCode": "{{featuredContractor.zip}}"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "{{featuredContractor.lat}}",
+          "longitude": "{{featuredContractor.lng}}"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "{{featuredContractor.rating}}",
+          "reviewCount": "{{featuredContractor.reviewCount}}"
+        }
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "{{cityName}}"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Fence Services in {{cityName}}",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Wood Fence Installation"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Vinyl Fence Installation"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Aluminum Fence Installation"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Chain Link Fence Installation"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "{{pageUrl}}/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "{{siteUrl}}/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Locations",
+          "item": "{{siteUrl}}/locations/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "{{cityName}}",
+          "item": "{{pageUrl}}"
+        }
+      ]
+    }
+  ]
+}

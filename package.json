@@ -9,6 +9,28 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.17.1"
+    "@astrojs/mdx": "^4.3.13",
+    "@astrojs/netlify": "^6.6.4",
+    "@astrojs/sitemap": "^3.7.0",
+    "@astrojs/svelte": "^7.2.5",
+    "@fontsource/dm-sans": "^5.2.8",
+    "@fontsource/inter": "^5.2.8",
+    "@iconify-json/lucide": "^1.2.88",
+    "@iconify-json/mdi": "^1.2.3",
+    "@tailwindcss/vite": "^4.1.18",
+    "astro": "^5.17.1",
+    "astro-compress": "^2.3.9",
+    "astro-icon": "^1.1.5",
+    "astro-robots-txt": "^1.0.0",
+    "astro-seo": "^1.1.0",
+    "astro-seo-schema": "^5.1.0",
+    "daisyui": "^5.5.18",
+    "lucide-svelte": "^0.563.0",
+    "nodemailer": "^8.0.0",
+    "schema-dts": "^1.1.5",
+    "svelte": "^5.49.2",
+    "tailwindcss": "^4.1.18",
+    "typescript": "^5.9.3",
+    "zod": "^4.3.6"
   }
 }

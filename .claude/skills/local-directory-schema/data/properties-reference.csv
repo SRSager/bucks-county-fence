@@ -1,0 +1,77 @@
+Schema Type,Property,Required,Type,Description,Example,Multi-County Note
+LocalBusiness,name,Yes,Text,Business name,"ABC Fence Company",Update county in description
+LocalBusiness,description,Yes,Text,Business description,"Premier fence installer in Bucks County",Change county name
+LocalBusiness,url,Yes,URL,Business website URL,"https://buckscountyfence.net/contractors/abc",Update domain
+LocalBusiness,telephone,Yes,Text,Primary phone number,"+1-215-555-1234",Include country code
+LocalBusiness,email,No,Text,Business email,"contact@abcfence.com",Optional field
+LocalBusiness,address,Yes,PostalAddress,Physical address,{},Required for GBP sync
+PostalAddress,streetAddress,Yes,Text,Street address,"123 Main Street",Required
+PostalAddress,addressLocality,Yes,Text,City name,"Doylestown",Use actual city
+PostalAddress,addressRegion,Yes,Text,State code,"PA",Update per state
+PostalAddress,postalCode,Yes,Text,ZIP code,"18901",Required
+PostalAddress,addressCountry,Yes,Text,Country code,"US",Usually US
+LocalBusiness,geo,Yes,GeoCoordinates,Geographic coordinates,{},Critical for map pack
+GeoCoordinates,latitude,Yes,Number,Latitude,"40.3101",Required
+GeoCoordinates,longitude,Yes,Number,Longitude,"-75.1299",Required
+LocalBusiness,serviceArea,Yes,Place,Areas served,"Bucks County",Update county name
+LocalBusiness,openingHours,Yes,Text,Hours of operation,"Mo-Fr 08:00-17:00",Use ISO format
+LocalBusiness,priceRange,No,Text,Price indication,"$$",$ to $$$
+LocalBusiness,paymentAccepted,No,Text,Payment methods,"Cash, Credit Card",List options
+LocalBusiness,currenciesAccepted,No,Text,Currency code,"USD",Usually USD
+LocalBusiness,aggregateRating,No,AggregateRating,Overall rating,{},For review stars
+AggregateRating,ratingValue,Yes,Number,Average rating,"4.8",1-5 scale
+AggregateRating,reviewCount,Yes,Integer,Number of reviews,"127",Total count
+LocalBusiness,review,No,Review,Individual reviews,[],Array of reviews
+Review,author,Yes,Person/Organization,Review author,{},Required
+Review,reviewRating,Yes,Rating,Star rating,{},Required
+Review,reviewBody,Yes,Text,Review text,"Great service!",Required
+Review,datePublished,Yes,Date,Review date,"2024-01-15",ISO 8601
+LocalBusiness,image,Yes,ImageObject,Business photos,[],At least 3 images
+ImageObject,contentUrl,Yes,URL,Image URL,"https://.../photo.jpg",Required
+ImageObject,description,No,Text,Image description,"Vinyl fence installation",Alt text
+Service,serviceType,Yes,Text,Service name,"Vinyl Fence Installation",Required
+Service,provider,Yes,LocalBusiness,Service provider,{},Link to business
+Service,areaServed,Yes,Place,Where service available,"Bucks County PA",Geographic area
+Service,hasOfferCatalog,No,OfferCatalog,Pricing catalog,{},Optional pricing
+OfferCatalog,name,Yes,Text,Catalog name,"Vinyl Fence Options",Descriptive
+OfferCatalog,itemListElement,Yes,Offer,List of offers,[],Array
+Offer,itemOffered,Yes,Service,Service being offered,{},Reference
+Offer,price,No,Text,Price amount,"25.00",Number or text
+Offer,priceUnit,No,Text,Unit of price,"per linear foot",Clarify pricing
+Place,name,Yes,Text,Location name,"Bucks County",Geographic name
+Place,geo,No,GeoCoordinates,Coordinates,{},For precise locations
+Place,containedInPlace,No,Place,Containing location,"Pennsylvania",State/country
+BreadcrumbList,itemListElement,Yes,ListItem,Breadcrumb items,[],Ordered array
+ListItem,position,Yes,Integer,Item position,1,Start at 1
+ListItem,name,Yes,Text,Link text,"Home",Navigation label
+ListItem,item,Yes,URL,Page URL,"https://.../",Full URL
+WebSite,url,Yes,URL,Site URL,"https://buckscountyfence.net",Update domain
+WebSite,name,Yes,Text,Site name,"Bucks County Fence",County-specific
+WebSite,potentialAction,No,SearchAction,Site search,{},Optional search
+SearchAction,target,Yes,URL,Search URL,"https://.../search?q={search_term}",Template
+Organization,name,Yes,Text,Organization name,"Bucks County Fence Directory",Brand name
+Organization,url,Yes,URL,Organization URL,"https://buckscountyfence.net",Domain
+Organization,logo,Yes,ImageObject,Logo image,{},Required
+Organization,contactPoint,No,ContactPoint,Contact methods,[],Array
+FAQPage,mainEntity,Yes,Question,FAQ items,[],Array
+Question,name,Yes,Text,Question text,"Do I need a permit?",Required
+Question,acceptedAnswer,Yes,Answer,Answer to question,{},Required
+Answer,text,Yes,Text,Answer text,"Yes in most townships.",Required
+Article,headline,Yes,Text,Article title,"Fence Zoning in Doylestown",Required
+Article,author,Yes,Person,Article author,{},Required
+Article,datePublished,Yes,Date,Publication date,"2024-01-15",ISO 8601
+Article,articleBody,Yes,Text,Article content,"Full text...",Required
+Article,publisher,Yes,Organization,Publishing org,{},Required
+HowTo,name,Yes,Text,Guide title,"How to Get a Fence Permit",Required
+HowTo,step,Yes,HowToStep,Steps in process,[],Array
+HowTo,totalTime,No,Duration,Time required,"P1D",ISO duration
+HowToStep,name,Yes,Text,Step title,"Submit Application",Required
+HowToStep,text,Yes,Text,Step instructions,"Visit the township office...",Required
+Person,name,Yes,Text,Person's name,"John Smith",Required
+Person,jobTitle,No,Text,Job title,"Owner",Optional
+Person,worksFor,No,Organization,Employer,{},Link to business
+VideoObject,name,Yes,Text,Video title,"Fence Installation Process",Required
+VideoObject,description,No,Text,Video description,"Step-by-step guide",Optional
+VideoObject,thumbnailUrl,Yes,URL,Thumbnail image,"https://.../thumb.jpg",Required
+VideoObject,contentUrl,Yes,URL,Video file URL,"https://.../video.mp4",Required
+VideoObject,uploadDate,Yes,Date,Upload date,"2024-01-15",ISO 8601

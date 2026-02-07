@@ -1,0 +1,14 @@
+No,Product Type,Primary (Hex),Secondary (Hex),CTA (Hex),Background (Hex),Text (Hex),Border (Hex),Notes
+1,SaaS (General),#2563EB,#3B82F6,#F97316,#F8FAFC,#1E293B,#E2E8F0,Trust blue + orange CTA contrast
+2,Service Landing Page,#0EA5E9,#38BDF8,#F97316,#F0F9FF,#0C4A6E,#BAE6FD,Sky blue trust + warm CTA
+3,E-commerce Luxury,#1C1917,#44403C,#CA8A04,#FAFAF9,#0C0A09,#D6D3D1,Premium dark + gold accent
+4,B2B Service,#0F172A,#334155,#0369A1,#F8FAFC,#020617,#E2E8F0,Professional navy + blue CTA
+5,Healthcare App,#0891B2,#22D3EE,#059669,#ECFEFF,#164E63,#A5F3FC,Calm cyan + health green
+6,Creative Agency,#EC4899,#F472B6,#06B6D4,#FDF2F8,#831843,#FBCFE8,Bold pink + cyan accent
+7,Portfolio/Personal,#18181B,#3F3F46,#2563EB,#FAFAFA,#09090B,#E4E4E7,Monochrome + blue accent
+8,Fintech/Crypto,#F59E0B,#FBBF24,#8B5CF6,#0F172A,#F8FAFC,#334155,Gold trust + purple tech
+9,Real Estate/Property,#0F766E,#14B8A6,#0369A1,#F0FDFA,#134E4A,#99F6E4,Trust teal + professional blue
+10,Restaurant/Food Service,#DC2626,#F87171,#CA8A04,#FEF2F2,#450A0A,#FECACA,Appetizing red + warm gold
+11,Construction/Architecture,#64748B,#94A3B8,#F97316,#F8FAFC,#334155,#E2E8F0,Industrial grey + safety orange
+12,Home Services (Plumber/Electrician),#1E40AF,#3B82F6,#F97316,#EFF6FF,#1E3A8A,#BFDBFE,Professional blue + urgent orange
+13,Local Business,#2563EB,#3B82F6,#059669,#F8FAFC,#1E293B,#E2E8F0,Trust blue + success green

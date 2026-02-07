@@ -1,0 +1,70 @@
+---
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ImageGenerator from '../../components/ImageGenerator.svelte';
+import { SEO } from 'astro-seo';
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<SEO
+			title="Image Generator | Bucks County Fence Admin"
+			description="Generate custom fence images using AI"
+		/>
+		<title>Image Generator | Bucks County Fence Admin</title>
+	</head>
+	<body class="min-h-screen bg-background">
+		<Header />
+		<main class="py-12">
+			<div class="container mx-auto px-4">
+				<div class="mb-8">
+					<a href="/admin" class="btn btn-ghost btn-sm mb-4">
+						← Back to Admin
+					</a>
+					<h1 class="text-3xl font-bold">AI Image Generator</h1>
+					<p class="text-muted-foreground">
+						Generate custom fence images using Google Gemini 3 Pro
+					</p>
+				</div>
+
+				<ImageGenerator client:load />
+
+				<div class="mt-12 max-w-4xl mx-auto">
+					<div class="alert alert-info">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+						</svg>
+						<div>
+							<h3 class="font-bold">Setup Required</h3>
+							<div class="text-sm">
+								<p>To use the image generator, you need to:</p>
+								<ol class="list-decimal list-inside mt-2">
+									<li>Get a Gemini API key from <a href="https://ai.google.dev/" class="link" target="_blank">Google AI Studio</a></li>
+									<li>Add it to your environment variables as <code>GEMINI_API_KEY</code></li>
+									<li>Restart the dev server</li>
+								</ol>
+							</div>
+						</div>
+					</div>
+
+					<div class="mt-8">
+						<h3 class="font-semibold mb-4">Prompt Ideas</h3>
+						<ul class="space-y-2 text-sm text-muted-foreground">
+							<li>• Beautiful cedar privacy fence in a suburban backyard with green grass</li>
+							<li>• White vinyl picket fence with rose bushes in front of a colonial house</li>
+							<li>• Modern black aluminum fence around a swimming pool with blue water</li>
+							<li>• Split rail wood fence in a rural setting with horses in the background</li>
+							<li>• Chain link fence with privacy slats at a commercial property</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>

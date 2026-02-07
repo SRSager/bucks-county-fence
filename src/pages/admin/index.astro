@@ -1,0 +1,115 @@
+---
+export const prerender = true;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Content Management - Bucks County Fence</title>
+  <link rel="stylesheet" href="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.css">
+  <style>
+    .admin-nav {
+      background: #1a1a1a;
+      padding: 1rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    .admin-nav a {
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+    .admin-nav a:hover {
+      background: #333;
+    }
+    .admin-nav .active {
+      background: #007acc;
+    }
+    .admin-nav h1 {
+      color: white;
+      margin: 0;
+      margin-right: auto;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <nav class="admin-nav">
+    <h1>🔧 Bucks County Fence Admin</h1>
+    <a href="/admin" class="active">Content Manager</a>
+    <a href="/admin/images">🎨 AI Image Generator</a>
+    <a href="/" target="_blank">View Site →</a>
+  </nav>
+  
+  <script type="module">
+    import CMS from 'https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js';
+    
+    CMS.init({
+      config: {
+        backend: {
+          name: 'github',
+          repo: 'your-username/bucks-county-fence',
+          branch: 'main',
+          base_url: 'https://bucks-county-fence.netlify.app',
+          auth_endpoint: 'api/auth'
+        },
+        media_folder: 'public/uploads',
+        public_folder: '/uploads',
+        collections: [
+          {
+            name: 'services',
+            label: 'Services',
+            folder: 'src/content/services',
+            create: true,
+            slug: '{{slug}}',
+            fields: [
+              { label: 'Title', name: 'title', widget: 'string' },
+              { label: 'Description', name: 'description', widget: 'text' },
+              { label: 'Price Range', name: 'priceRange', widget: 'select', options: ['$', '$$', '$$$', '$$$$'], required: false },
+              { label: 'Featured', name: 'featured', widget: 'boolean', default: false },
+              { label: 'Image', name: 'image', widget: 'image', required: false },
+              { label: 'Order', name: 'order', widget: 'number', default: 0 },
+              { label: 'Body', name: 'body', widget: 'markdown' }
+            ]
+          },
+          {
+            name: 'testimonials',
+            label: 'Testimonials',
+            folder: 'src/content/testimonials',
+            create: true,
+            slug: '{{slug}}',
+            fields: [
+              { label: 'Author', name: 'author', widget: 'string' },
+              { label: 'Location', name: 'location', widget: 'string' },
+              { label: 'Rating', name: 'rating', widget: 'number', min: 1, max: 5 },
+              { label: 'Date', name: 'date', widget: 'datetime' },
+              { label: 'Featured', name: 'featured', widget: 'boolean', default: false },
+              { label: 'Body', name: 'body', widget: 'text' }
+            ]
+          },
+          {
+            name: 'gallery',
+            label: 'Gallery',
+            folder: 'src/content/gallery',
+            create: true,
+            slug: '{{slug}}',
+            fields: [
+              { label: 'Title', name: 'title', widget: 'string' },
+              { label: 'Description', name: 'description', widget: 'text', required: false },
+              { label: 'Image', name: 'image', widget: 'image' },
+              { label: 'Category', name: 'category', widget: 'select', options: ['wood', 'vinyl', 'aluminum', 'chain-link', 'custom'] },
+              { label: 'Featured', name: 'featured', widget: 'boolean', default: false },
+              { label: 'Location', name: 'location', widget: 'string', required: false }
+            ]
+          }
+        ]
+      }
+    });
+  </script>
+</body>
+</html>

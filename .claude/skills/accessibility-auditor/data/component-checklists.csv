@@ -1,0 +1,85 @@
+Component,Check,Description,Level,How to Test,Auto Fix
+Navigation,Skip Link,Skip to main content link is first focusable,A,Tab to first element,Add <a href="#main">Skip</a>
+Navigation,ARIA Current,Current page marked with aria-current="page",A,Screen reader navigation,Add aria-current to active link
+Navigation,Focus Indicator,Focus outline is visible on all links,AA,Tab through navigation,Ensure :focus-visible styles
+Navigation,Dropdown Keyboard,Dropdowns open with Enter/Space and close with Escape,A,Keyboard only test,Add keydown handlers
+Navigation,Mobile Menu,Menu button has aria-expanded and aria-controls,A,Screen reader on mobile,Add ARIA attributes
+Header,Logo Alt,Logo has descriptive alt text,A,Screen reader on logo,alt="[Company] home"
+Header,Site Title,Site name in h1 on homepage,A,Screen reader headings,Wrap logo text in h1
+Footer,Copyright Year,Current year in copyright,A,Visual inspection,Dynamic year insertion
+Footer,Contact Info,Phone/email are accessible links,A,Screen reader links,Use tel: and mailto: schemes
+Footer,Social Links,Social icons have accessible labels,A,Screen reader icons,aria-label="[Platform]"
+Listing Card,Heading Level,Card title is proper heading level,AA,Heading outline,Use h2/h3 appropriately
+Listing Card,Image Alt,Contractor photo has descriptive alt,A,Screen reader images,alt="[Company] fence installation"
+Listing Card,Phone Link,Phone number is clickable link,A,Keyboard/screen reader,Wrap in <a href="tel:">
+Listing Card,Read More,Link text describes destination,A,Link context test,"'View [Company] profile' not 'Read more'"
+Listing Card,Focusable,Entire card or link is focusable,A,Tab test,Ensure proper tab order
+Form,Label Association,All inputs have associated labels,A,Screen reader forms,<label for="id"> or aria-labelledby
+Form,Error Summary,Errors listed at top of form,A,Submit invalid form,Add role="alert" error summary
+Form,Inline Errors,Each field shows error message,A,Submit with empty fields,Associate error with aria-describedby
+Form,Required Fields,Required status indicated,A,Visual/screen reader,Use aria-required and visual indicator
+Form,Input Types,Correct input type used (email/tel),A,Mobile keyboard test,type="email" vs type="text"
+Form,Autocomplete,Appropriate autocomplete attributes,AA,Browser autofill test,autocomplete="tel"
+Image,Alt Text,All images have meaningful alt,A,Screen reader images,Descriptive alt or aria-hidden
+Image,Decorative,Decorative images marked aria-hidden,A,Screen reader on icons,alt="" or role="presentation"
+Image,Complex Alt,Complex images have longdesc or detailed alt,A,Screen reader on diagrams,Provide text alternative
+Map,Keyboard Access,Map is keyboard accessible,A,Tab to map,Provide keyboard controls
+Map,Alternative,Text list of locations provided,AA,Screen reader alternative,List below map
+Table,Headers,Column/row headers marked with th,A,Screen reader tables,Use <th scope="col">
+Table,Caption,Table has descriptive caption,A,Screen reader tables,<caption> description
+Table,Responsive,Table is readable on mobile,AA,Mobile viewport,Scroll container or card layout
+Modal,Focus Trap,Focus stays within modal when open,A,Tab inside modal,Implement focus trap
+Modal,Close Button,Close button is first/last focusable,A,Screen reader modal,Ensure close is accessible
+Modal,ARIA Labeled,Modal has aria-labelledby pointing to title,A,Screen reader announcement,Add aria-labelledby
+Modal,Escape,ESC closes modal,A,Keyboard test,Add keydown handler
+Accordion,Button Toggle,Accordion uses button not div,A,Screen reader interaction,<button> with aria-expanded
+Accordion,State,Expanded state communicated,A,Screen reader state,aria-expanded="true/false"
+Accordion,Focus,Focus moves to expanded content,A,Keyboard test,Focus management on toggle
+Tabs,Role,Tab list has role="tablist",A,Screen reader navigation,Add proper roles
+Tabs,Selected,Active tab marked aria-selected,A,Screen reader state,aria-selected="true"
+Tabs,Panel Association,Tab panel linked with aria-labelledby,A,Screen reader context,Link tab to panel
+Carousel,Pause Control,Auto-rotating carousel has pause button,A,Manual test,Add pause/play controls
+Carousel,Slide Announcement,Slide changes announced,A,Screen reader,Use aria-live
+Carousel,Keyboard Nav,Arrow keys navigate slides,A,Keyboard test,Add keydown handlers
+Phone Number,Link Scheme,Phone is tel: link,A,Mobile tap test,<a href="tel:+1...">
+Phone Number,Accessible Name,Link text is readable number,A,Screen reader link,Text: "(215) 555-1234"
+Address,Structured Data,Address uses address element or schema,A,Screen reader,Use <address> or schema.org
+Address,Multiple Lines,Multi-line addresses readable,A,Screen reader,<br> between lines
+Link,Descriptive Text,Link text describes destination,A,Screen reader context,"'Contact us' not 'Click here'"
+Link,External,External links indicate they open new window,A,Visual/screen reader,Add icon + aria-label
+Link,Download,Download links indicate file type/size,AA,Screen reader link,Add file info to link text
+Button,Purpose,Button text describes action,A,Screen reader,Descriptive text
+Button,State,Toggle buttons show pressed state,A,Screen reader state,aria-pressed for toggles
+Video,Captions,Video has synchronized captions,A,Manual review,Add track element
+Video,Transcript,Text transcript available,AA,Page content,Provide transcript link
+Video,Audio Description,Visual content described,AA,Secondary audio track,Add descriptions
+Focus,Visible,Focus indicator visible on all elements,AA,Tab test,Ensuring :focus-visible styles
+Focus,Order,Tab order follows visual order,A,Tab test,Logical DOM order
+Focus,Trap,No unintended focus traps,A,Tab test,Can tab away from all elements
+Zoom,400%,Content readable at 400% zoom,AA,Browser zoom,No horizontal scroll
+Zoom,Reflow,Content reflows without loss,A,Responsive test,CSS handles zoom
+Animation,Pause,Moving content can be paused,A,Manual test,Pause controls
+Animation,Reduced Motion,Respects prefers-reduced-motion,AA,System preference,Add @media query
+Color,Contrast Text,4.5:1 contrast for normal text,AA,Contrast checker,Adjust colors
+Color,Contrast UI,3:1 contrast for UI components,AA,Contrast checker,Button borders
+Color,Not Only,Information not conveyed by color alone,A,Grayscale test,Add icons/text
+Language,Page Lang,html element has lang attribute,A,HTML validation,<html lang="en">
+Language,Parts,Language changes marked,A,Screen reader,<span lang="es">
+Page Title,Unique,Each page has unique descriptive title,A,Browser tabs,"'Contact | Bucks County Fence'"
+Landmarks,Main,Main content wrapped in main landmark,A,Screen reader landmarks,<main id="main">
+Landmarks,Navigation,Nav wrapped in nav landmark,A,Screen reader landmarks,<nav aria-label="Main">
+Landmarks,Footer,Footer in contentinfo landmark,A,Screen reader,<footer> or role="contentinfo"
+Landmarks,Complementary,Sidebars in aside landmark,A,Screen reader,<aside> or role="complementary"
+Landmarks,Search,Search in search landmark,AA,Screen reader,<form role="search">
+Heading,H1,Page has exactly one h1,A,Heading outline,Single h1 per page
+Heading,Hierarchy,Headings follow logical order,A,Heading outline,h1 → h2 → h3
+Heading,Skip,No skipped heading levels,AA,Heading outline,Sequential order
+PDF,Alternative,PDF content available as HTML,AA,Content audit,Provide HTML version
+PDF,Tagged,PDF is properly tagged,A,PDF checker,Use tagged PDF
+Print,Content,Print styles preserve content,A,Print preview,Test print stylesheet
+Print,Links,URLs visible in print,A,Print preview,Show href in ::after
+Status,Announce,Status updates announced,A,Screen reader live regions,Use aria-live
+Status,No Focus,Status doesn't move focus,A,Screen reader,Update without focus change
+Error,Identify,Errors identified in text,A,Form submission,Text error messages
+Error,Suggestion,Error correction suggested,AA,Invalid submission,Provide helpful guidance
+Error,Prevention,Important submissions can be reviewed,AA,Form submission,Confirmation step
