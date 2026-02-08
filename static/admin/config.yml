@@ -5,6 +5,9 @@ backend:
   base_url: https://bucks-county-fence.netlify.app
   auth_endpoint: api/auth
 
+# Prevent search engine indexing during development
+seo: false
+
 media_folder: public/uploads
 public_folder: /uploads
 
