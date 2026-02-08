@@ -46,9 +46,11 @@ export const prerender = false;
     <a href="/" target="_blank">View Site →</a>
   </nav>
   
-  <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
-  <script>
-    sveltiaCMS.init({
+  <script type="module">
+    // Import and initialize Sveltia CMS
+    import * as CMS from 'https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js';
+    
+    CMS.init({
       backend: {
         name: 'github',
         repo: 'SRSager/bucks-county-fence',
