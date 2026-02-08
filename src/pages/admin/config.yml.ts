@@ -103,6 +103,41 @@ collections:
         name: location
         widget: string
         required: false
+
+  - name: blog
+    label: Blog Posts
+    folder: src/content/blog
+    create: true
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Description
+        name: description
+        widget: text
+      - label: Publish Date
+        name: pubDate
+        widget: datetime
+      - label: Author
+        name: author
+        widget: string
+        default: 'Bucks County Fence'
+      - label: Image
+        name: image
+        widget: image
+        required: false
+      - label: Featured
+        name: featured
+        widget: boolean
+        default: false
+      - label: Tags
+        name: tags
+        widget: list
+        default: []
+      - label: Body
+        name: body
+        widget: markdown
 `;
 
   return new Response(config, {

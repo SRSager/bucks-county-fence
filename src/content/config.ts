@@ -35,8 +35,22 @@ const galleryCollection = defineCollection({
   }),
 });
 
+const blogCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.date(),
+    author: z.string().default('Bucks County Fence'),
+    image: z.string().optional(),
+    featured: z.boolean().default(false),
+    tags: z.array(z.string()).default([]),
+  }),
+});
+
 export const collections = {
   services: servicesCollection,
   testimonials: testimonialsCollection,
   gallery: galleryCollection,
+  blog: blogCollection,
 };
