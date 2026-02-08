@@ -48,7 +48,8 @@ export const prerender = false;
   
   <script type="module">
     // Load Sveltia CMS and initialize
-    const { default: CMS } = await import('https://unpkg.com/@sveltia/cms@0.130.0/dist/sveltia-cms.js');
+    const mod = await import('https://unpkg.com/@sveltia/cms@0.130.0/dist/sveltia-cms.js');
+    const CMS = mod.default || mod.init || mod;
     
     CMS.init({
       backend: {
