@@ -46,7 +46,11 @@ export const prerender = false;
     <a href="/" target="_blank">View Site →</a>
   </nav>
   
-  <!-- Sveltia CMS will auto-initialize when loaded -->
+  <!-- Sveltia CMS will auto-initialize with config from endpoint -->
   <script src="https://unpkg.com/@sveltia/cms@0.130.0/dist/sveltia-cms.js" defer></script>
+  <script>
+    // Override config URL to use our endpoint
+    window.SVELTIA_CMS_CONFIG_URL = '/admin/config.yml';
+  </script>
 </body>
 </html>
