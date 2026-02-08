@@ -46,10 +46,9 @@ export const prerender = false;
     <a href="/" target="_blank">View Site →</a>
   </nav>
   
-  <script src="https://unpkg.com/@sveltia/cms@0.130.0/dist/sveltia-cms.js"></script>
   <script>
-    // Wait for Sveltia to load and initialize
-    function initSveltia() {
+    // Poll for Sveltia to be ready
+    function waitForSveltia() {
       if (typeof sveltiaCMS !== 'undefined') {
         sveltiaCMS.init({
           backend: {
@@ -112,12 +111,13 @@ export const prerender = false;
         });
       } else {
         // Retry if not loaded yet
-        setTimeout(initSveltia, 100);
+        setTimeout(waitForSveltia, 50);
       }
     }
     
-    // Start initialization
-    initSveltia();
+    // Start polling after a short delay to ensure script loads
+    setTimeout(waitForSveltia, 200);
   </script>
+  <script src="https://unpkg.com/@sveltia/cms@0.130.0/dist/sveltia-cms.js" defer></script>
 </body>
 </html>
