@@ -46,29 +46,12 @@ export const prerender = false;
     <a href="/" target="_blank">View Site →</a>
   </nav>
   
-  <script type="module">
-    // Wait for Sveltia to be ready
-    const waitForSveltia = () => {
-      return new Promise((resolve) => {
-        if (window.sveltiaCMS) {
-          resolve(window.sveltiaCMS);
-        } else {
-          const observer = new MutationObserver(() => {
-            if (window.sveltiaCMS) {
-              observer.disconnect();
-              resolve(window.sveltiaCMS);
-            }
-          });
-          observer.observe(document.body, { childList: true });
-          // Timeout after 5 seconds
-          setTimeout(() => resolve(null), 5000);
-        }
-      });
-    };
-
-    waitForSveltia().then((CMS) => {
-      if (CMS) {
-        CMS.init({
+  <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.iife.js"></script>
+  <script>
+    // Wait for DOM to be ready
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.sveltiaCMS) {
+        window.sveltiaCMS.init({
       backend: {
         name: 'github',
         repo: 'SRSager/bucks-county-fence',
@@ -129,6 +112,7 @@ export const prerender = false;
         });
       } else {
         console.error('Sveltia CMS failed to load');
+        });
       }
     });
   </script>
