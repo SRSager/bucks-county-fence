@@ -46,12 +46,14 @@ export const prerender = false;
     <a href="/" target="_blank">View Site →</a>
   </nav>
   
-  <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.iife.js"></script>
+  <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js" defer></script>
   <script>
-    // Wait for DOM to be ready
+    // Wait for DOM to be ready and Sveltia to load
     document.addEventListener('DOMContentLoaded', () => {
-      if (window.sveltiaCMS) {
-        window.sveltiaCMS.init({
+      // Give the script time to load
+      setTimeout(() => {
+        if (window.sveltiaCMS) {
+          window.sveltiaCMS.init({
       backend: {
         name: 'github',
         repo: 'SRSager/bucks-county-fence',
@@ -109,10 +111,11 @@ export const prerender = false;
           ]
         }
       ]
-        });
-      } else {
-        console.error('Sveltia CMS failed to load');
-      }
+          });
+        } else {
+          console.error('Sveltia CMS failed to load');
+        }
+      }, 500);
     });
   </script>
 </body>
