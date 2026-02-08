@@ -6,6 +6,7 @@ import netlify from '@astrojs/netlify';
 import svelte from '@astrojs/svelte';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
+import sveltiaCMS from 'astro-sveltia-cms';
 
 import icon from 'astro-icon';
 
@@ -19,6 +20,7 @@ export default defineConfig({
     svelte(),
     mdx(),
     sitemap(),
+    sveltiaCMS(),
     icon({
       include: {
         lucide: ['home', 'menu', 'x', 'phone', 'mail', 'map-pin', 'clock', 'star', 'shield-check', 'award', 'heart', 'check', 'arrow-right', 'facebook', 'grid', 'navigation', 'quote', 'image', 'search', 'users', 'map', 'external-link', 'hard-hat', 'arrow-up-right', 'chevron-down', 'help-circle', 'thumbs-up', 'globe', 'fence', 'message-circle', 'message-square-quote'],
