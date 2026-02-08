@@ -46,7 +46,9 @@ export const prerender = false;
     <a href="/" target="_blank">View Site →</a>
   </nav>
   
+  <script src="https://unpkg.com/@sveltia/cms@0.130.0/dist/sveltia-cms.js"></script>
   <script>
+    // Wait for Sveltia to load and initialize
     function initSveltia() {
       if (typeof sveltiaCMS !== 'undefined') {
         sveltiaCMS.init({
@@ -113,7 +115,9 @@ export const prerender = false;
         setTimeout(initSveltia, 100);
       }
     }
+    
+    // Start initialization
+    initSveltia();
   </script>
-  <script src="https://unpkg.com/@sveltia/cms@0.130.0/dist/sveltia-cms.js" onload="initSveltia()"></script>
 </body>
 </html>
