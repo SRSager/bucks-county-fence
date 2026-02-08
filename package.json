@@ -24,7 +24,6 @@
     "astro-robots-txt": "^1.0.0",
     "astro-seo": "^1.1.0",
     "astro-seo-schema": "^5.1.0",
-    "astro-sveltia-cms": "^0.1.0",
     "daisyui": "^5.5.18",
     "lucide-svelte": "^0.563.0",
     "nodemailer": "^8.0.0",
