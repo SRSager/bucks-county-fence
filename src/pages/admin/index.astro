@@ -1,11 +1,5 @@
 ---
 export const prerender = false;
-
-declare global {
-  interface Window {
-    SveltiaCMS: any;
-  }
-}
 ---
 
 <!DOCTYPE html>
@@ -16,6 +10,10 @@ declare global {
   <title>Content Management - Bucks County Fence</title>
   <link rel="stylesheet" href="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.css">
   <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js" type="module"></script>
+  <script>
+    // @ts-ignore
+    window.SveltiaCMS = window.SveltiaCMS || {};
+  </script>
   <style>
     .admin-nav {
       background: #1a1a1a;
